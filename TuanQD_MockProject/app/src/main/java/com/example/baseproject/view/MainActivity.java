@@ -8,11 +8,13 @@ import androidx.databinding.DataBindingUtil;
 
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.app.ActionBar;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.example.baseproject.R;
@@ -30,12 +32,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_main);
+//        getSupportActionBar().hide();
         Toolbar toolbar = activityMainBinding.layoutToolbar.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activityMainBinding.drawerLayout.open();
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
         });
 
