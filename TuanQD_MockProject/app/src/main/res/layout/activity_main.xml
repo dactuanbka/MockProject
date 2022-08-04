@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:openDrawer="start">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.AppBarLayout
+                style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
+
+                <include
+                    android:id="@+id/layout_toolbar"
+                    layout="@layout/toolbar" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/black"
+            app:headerLayout="@layout/header_navigation_drawer"
+            app:itemIconTint="@color/icon_mock"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/options_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

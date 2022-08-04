@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentSetting">
+    <fragment
+    android:label="Page title">
+</fragment>
+    <fragment
+        android:id="@+id/fragmentSetting"
+        android:name="com.example.baseproject.view.FragmentSetting"
+        android:label="FragmentSetting" />
+</navigation>

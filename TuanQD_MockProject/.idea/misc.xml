@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable-v23/bg_splash.xml" value="0.1675" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/bg_splash.xml" value="0.2905" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic__01_popup_menu_paint.xml" value="0.316" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic__02_popup_menu_scissors.xml" value="0.293" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic__04_popup_menu_sound_bars.xml" value="0.196" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic_burger_menu.xml" value="0.142" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic_logo.xml" value="0.288" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic_screen__splash.xml" value="0.18" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/ic_screen_spalsh.xml" value="0.18" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/stroke_popup_menu.xml" value="0.239" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/stroke_search_view.xml" value="0.196" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/drawable/themes_custom_item.xml" value="0.1965" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/activity_main.xml" value="0.13202247191011235" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/cutter_custom_item.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/fragment_setting.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/header_navigation_drawer.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/item_recommend.xml" value="0.1828125" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/item_setting.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/popup_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/sleep_timer_custom_item.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/layout/toolbar.xml" value="0.18" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/menu/layout_setting_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/menu/layout_setting_popup_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/menu/options_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/xml/custom_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/TuanQD_MockProject/app/src/main/res/xml/searchable.xml" value="0.18541666666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

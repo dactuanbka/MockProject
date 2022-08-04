@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="style_view_popup_menu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">9</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="style_linear_popup_menu">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/stroke_popup_menu</item>
+    </style>
+
+    <style name="style_imageView_popup_menu">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_weight">1</item>
+
+    </style>
+
+</resources>

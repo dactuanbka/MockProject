@@ -1,0 +1,19 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    style="@style/style_linear_popup_menu">
+
+    <ImageView
+        android:id="@+id/imgThemes"
+        app:srcCompat="@drawable/ic__01_popup_menu_paint"
+        style="@style/style_imageView_popup_menu" />
+
+    <TextView
+        android:id="@+id/txtThemes"
+        android:text="@string/themes"
+        style="@style/style_view_popup_menu" />
+
+</LinearLayout>
+</layout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Base Project</string>
+    <string name="well_come">Well come</string>
+    <string name="search_title">Search Song</string>
+    <string name="search_hint">Search album song</string>
+    <string name="search_album_song">Search album song</string>
+    <string name="_328_n_songs">328 \n Songs</string>
+    <string name="_52_n_albums">52 \n Albums</string>
+    <string name="_87_n_artists">87 \n Artists</string>
+    <string name="themes">Themes</string>
+    <string name="ringtone_cutter">Ringtone Cutter</string>
+    <string name="sleep_timer">Sleep Timer</string>
+    <string name="equliser">Equliser</string>
+    <string name="drive_mode">Drive Mode</string>
+    <string name="hidden_folder">Hidden Folder</string>
+    <string name="scan_media">Scan Media</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
