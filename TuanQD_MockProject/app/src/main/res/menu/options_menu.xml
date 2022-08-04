@@ -6,8 +6,10 @@
         android:id="@+id/itemThemes"
         app:actionLayout="@layout/themes_custom_item"
         android:icon="@drawable/ic__01_popup_menu_paint"
-        android:title="@string/themes" />
+        android:title="@string/themes" >
+    </item>
     <item
+
         android:id="@+id/itemCutter"
         android:icon="@drawable/ic__02_popup_menu_scissors"
         android:title="@string/ringtone_cutter"

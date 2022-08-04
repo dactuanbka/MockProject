@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:openDrawer="start">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -21,8 +24,9 @@
                 android:fitsSystemWindows="true">
 
                 <include
-                    android:id="@+id/layout_toolbar"
-                    layout="@layout/toolbar" />
+                    android:id="@+id/layoutToolbar"
+                    layout="@layout/toolbar">
+                </include>
             </com.google.android.material.appbar.AppBarLayout>
 
             <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
@@ -34,9 +38,15 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/black"
-            app:headerLayout="@layout/header_navigation_drawer"
-            app:itemIconTint="@color/icon_mock"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/options_menu" />
+            android:fitsSystemWindows="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/menuSetting"
+                layout="@layout/menu_setting">
+            </include>
+        </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

@@ -10,7 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -55,7 +56,6 @@
             android:id="@+id/imgThemes"
             app:srcCompat="@drawable/ic__01_popup_menu_paint"
             style="@style/style_imageView_popup_menu" />
-
         <TextView
             android:id="@+id/txtThemes"
             android:text="@string/themes"

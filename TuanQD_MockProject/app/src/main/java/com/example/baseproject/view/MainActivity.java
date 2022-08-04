@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import android.app.ActionBar;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.MenuItem;
@@ -39,10 +40,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 activityMainBinding.drawerLayout.open();
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
             }
         });
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
 
 //		NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
 //				findFragmentById(R.id.nav_host_fragment);
