@@ -4,8 +4,7 @@
     app:showAsAction="always">
     <item
         android:id="@+id/itemThemes"
-        android:icon="@drawable/ic__01_popup_menu_paint"
-        android:title="@string/themes"
+        android:title=""
         app:actionLayout="@layout/themes_custom_item"/>
     <item
         android:id="@+id/itemCutter"
