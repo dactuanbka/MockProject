@@ -3,50 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:fitsSystemWindows="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:openDrawer="start">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawerLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:openDrawer="start">
 
-            <com.google.android.material.appbar.AppBarLayout
-                style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+            <include
+                android:id="@+id/app_bar_main"
+                layout="@layout/app_bar_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/black"
                 android:fitsSystemWindows="true">
 
-                <include
-                    android:id="@+id/layoutToolbar"
-                    layout="@layout/toolbar">
-                </include>
-            </com.google.android.material.appbar.AppBarLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <include
+                        android:id="@+id/menuSetting"
+                        layout="@layout/menu_slide">
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
+                    </include>
+
+                </LinearLayout>
+
+            </com.google.android.material.navigation.NavigationView>
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_bottom_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/black"
-            android:fitsSystemWindows="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include
-                android:id="@+id/menuSetting"
-                layout="@layout/menu_setting">
-            </include>
-        </LinearLayout>
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/black"
+            app:itemIconTint="@color/nav_bottom_selected"
+            app:itemTextColor="@color/nav_bottom_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment_content_main"
+            app:layout_constraintVertical_bias="0.985"
+            app:menu="@menu/menu_bottom_nav">
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </LinearLayout>
 </layout>

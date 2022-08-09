@@ -8,4 +8,5 @@
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
   <color name="icon_mock">#e57780</color>
+  <color name="selected_bottom_nav">#e57780</color>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_songs_fragment"
+    app:startDestination="@id/allSongsFragment">
+
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="com.tuanqd.mockproject.songs.viewpager_songs.AlbumsFragment"
+        android:label="fragment_albums"
+        tools:layout="@layout/fragment_albums" />
+    <fragment
+        android:id="@+id/allSongsFragment"
+        android:name="com.tuanqd.mockproject.songs.viewpager_songs.AllSongsFragment"
+        android:label="fragment_all_songs"
+        tools:layout="@layout/fragment_all_songs" />
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.tuanqd.mockproject.songs.viewpager_songs.ArtistFragment"
+        android:label="fragment_artist"
+        tools:layout="@layout/fragment_artist" />
+    <fragment
+        android:id="@+id/genreFragment"
+        android:name="com.tuanqd.mockproject.songs.viewpager_songs.GenreFragment"
+        android:label="fragment_genre"
+        tools:layout="@layout/fragment_genre" />
+    <fragment
+        android:id="@+id/playlistSongsFragment"
+        android:name="com.tuanqd.mockproject.songs.viewpager_songs.PlaylistSongsFragment"
+        android:label="fragment_playlist_songs"
+        tools:layout="@layout/fragment_playlist_songs" />
+</navigation>

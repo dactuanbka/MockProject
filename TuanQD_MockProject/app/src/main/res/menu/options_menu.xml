@@ -4,40 +4,33 @@
     app:showAsAction="always">
     <item
         android:id="@+id/itemThemes"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__01_popup_menu_paint"
+        android:icon="@drawable/ic_menu_slide_paint"
         android:title="@string/themes" >
     </item>
     <item
 
         android:id="@+id/itemCutter"
-        android:icon="@drawable/ic__02_popup_menu_scissors"
-        android:title="@string/ringtone_cutter"
-        app:actionLayout="@layout/themes_custom_item"/>
+        android:icon="@drawable/ic_menu_slide_scissors"
+        android:title="@string/ringtone_cutter" />
     <item
         android:id="@+id/itemSleepTimer"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__03_popup_menu_stopwatch"
+        android:icon="@drawable/ic_menu_slide_stopwatch"
         android:title="@string/sleep_timer" />
     <item
         android:id="@+id/itemEquliser"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__04_popup_menu_sound_bars"
+        android:icon="@drawable/ic_menu_slide_sound_bars"
         android:title="@string/equliser" />
     <item
         android:id="@+id/itemDriveMode"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__3_popup_menu_car"
+        android:icon="@drawable/ic_menu_slide_car"
         android:title="@string/drive_mode" />
     <item
         android:id="@+id/itemHiddenFolder"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__06_popup_menu_folder"
+        android:icon="@drawable/ic_menu_slide_folder"
         android:title="@string/hidden_folder" />
     <item
         android:id="@+id/itemScanMedia"
-        app:actionLayout="@layout/themes_custom_item"
-        android:icon="@drawable/ic__07_popup_menu_scanner"
+        android:icon="@drawable/ic_menu_slide_scanner"
         android:title="@string/scan_media" />
 
 </menu>
