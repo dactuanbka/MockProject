@@ -1,7 +1,12 @@
 package com.tuanqd.mockproject.songs.viewpager_songs;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadata;
+import android.media.MediaMetadataRetriever;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,7 +19,8 @@ import com.example.baseproject.databinding.ItemAllsongsSongsBinding;
 
 public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSongsViewHolder> {
     private Cursor deviceCursor;
-//    int count = 0;
+    Bitmap bitmap = null;
+    int count = 0;
 
     public AllSongsAdapter(Cursor deviceCursor) {
         this.deviceCursor = deviceCursor;
@@ -33,26 +39,37 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
     @Override
     public void onBindViewHolder(@NonNull AllSongsViewHolder holder, int position) {
         if (deviceCursor != null && deviceCursor.moveToPosition(position)) {
+            String img = deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
+            MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
+            BitmapFactory.Options bfo = new BitmapFactory.Options();
+            Log.i("TAG", "" + img);
+            metadataRetriever.setDataSource(img);
+            byte[] rawBitmap = metadataRetriever.getEmbeddedPicture();
+            if (rawBitmap != null) {
+                bitmap = BitmapFactory.decodeByteArray(rawBitmap, 0, rawBitmap.length, bfo);
+            }
             AllSongsModel allSongsModel = new AllSongsModel(
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
-                    R.drawable.ic_burger_menu,
+                    bitmap,
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)),
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)));
             holder.mItemAllSongsSongsBinding.setAllSongsModel(allSongsModel);
             holder.mItemAllSongsSongsBinding.executePendingBindings();
-
         }
+
     }
 
     @Override
     public int getItemCount() {
+        Log.i("COUNT", "" + count);
         if (deviceCursor != null) {
             return deviceCursor.getCount();
         } else {
             return 0;
         }
     }
+
     public void swapCursor(Cursor newDeviceCursor) {
         if (deviceCursor != null) {
             deviceCursor.close();

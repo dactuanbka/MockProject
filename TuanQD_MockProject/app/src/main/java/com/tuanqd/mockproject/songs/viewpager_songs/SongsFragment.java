@@ -31,6 +31,7 @@ ViewPager2 viewPager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -40,6 +41,7 @@ ViewPager2 viewPager;
         // Inflate the layout for this fragment
         songsPagerAdapter = new SongsPagerAdapter(this);
         viewPager= fragmentSongsBinding.pagerSongsFragment;
+        viewPager.setPageTransformer(new ZoomOutPageTransformer());
         viewPager.setAdapter(songsPagerAdapter);
         TabLayout tabLayout= fragmentSongsBinding.tabLayoutSongsFragment;
 
@@ -64,4 +66,5 @@ ViewPager2 viewPager;
         }).attach();
         return fragmentSongsBinding.getRoot();
     }
+
 }

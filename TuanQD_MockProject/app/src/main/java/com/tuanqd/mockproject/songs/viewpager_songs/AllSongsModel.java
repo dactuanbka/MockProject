@@ -1,26 +1,28 @@
 package com.tuanqd.mockproject.songs.viewpager_songs;
 
+import android.graphics.Bitmap;
+
 public class AllSongsModel {
     private String ID;
-    private int thumbs;
+    private Bitmap bitmap;
     private String title;
     private String artist;
     private String duration;
 
-    public AllSongsModel(String ID, int thumbs, String title, String artist, String duration) {
+    public AllSongsModel(String ID, Bitmap bitmap, String title, String artist, String duration) {
         this.ID = ID;
-        this.thumbs = thumbs;
+        this.bitmap = bitmap;
         this.title = title;
         this.artist = artist;
         this.duration = duration;
     }
 
-    public int getThumbs() {
-        return thumbs;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setThumbs(int thumbs) {
-        this.thumbs = thumbs;
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public String getID() {
