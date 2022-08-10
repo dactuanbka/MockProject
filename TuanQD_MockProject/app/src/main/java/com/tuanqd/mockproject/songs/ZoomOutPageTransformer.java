@@ -1,4 +1,4 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs;
 
 import android.view.View;
 

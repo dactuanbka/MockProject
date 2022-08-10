@@ -1,4 +1,4 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs.playlist;
 
 import android.os.Bundle;
 
@@ -10,16 +10,15 @@ import android.view.ViewGroup;
 
 import com.example.baseproject.R;
 
-public class AlbumsFragment extends Fragment {
+public class PlaylistSongsFragment extends Fragment {
 
 
-    public AlbumsFragment() {
+    public PlaylistSongsFragment() {
         // Required empty public constructor
     }
-
     // TODO: Rename and change types and number of parameters
-    public static AlbumsFragment newInstance(String param1, String param2) {
-        AlbumsFragment fragment = new AlbumsFragment();
+    public static PlaylistSongsFragment newInstance(String param1, String param2) {
+        PlaylistSongsFragment fragment = new PlaylistSongsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -36,6 +35,6 @@ public class AlbumsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_albums, container, false);
+        return inflater.inflate(R.layout.fragment_playlist_songs, container, false);
     }
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <ImageView
+        android:id="@+id/image_thumbs_notification"
+        android:layout_width="53dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_artist"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/image_thumbs_notification"
+        android:text="@string/title"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_artist"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/exit_notification_button"
+        android:layout_toEndOf="@id/image_thumbs_notification"
+        android:text="@string/artist"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/play_pause_notification_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/img_next_notification_button"
+        android:src="@drawable/ic_play_music" />
+
+    <ImageView
+        android:id="@+id/exit_notification_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/img_prev_notification_button"
+        android:src="@drawable/ic_cancel_24" />
+
+    <ImageView
+        android:id="@+id/img_next_notification_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="20dp"
+        android:foregroundGravity="center_vertical"
+        app:srcCompat="@drawable/ic_next_24" />
+
+    <ImageView
+        android:id="@+id/img_prev_notification_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/play_pause_notification_button"
+        app:srcCompat="@drawable/ic_previous_24" />
+</RelativeLayout>

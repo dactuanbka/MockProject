@@ -1,13 +1,13 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs.allsongs;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,13 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baseproject.R;
 import com.example.baseproject.databinding.ItemAllsongsSongsBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSongsViewHolder> {
     private Cursor deviceCursor;
     Bitmap bitmap = null;
     int count = 0;
+    AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
+    SongInAllSongsClicked songInAllSongClicked;
+    List<AllSongsModel> allSongsModelList = new ArrayList<>();
 
-    public AllSongsAdapter(Cursor deviceCursor) {
+    public AllSongsAdapter(Cursor deviceCursor, SongInAllSongsClicked songInAllSongClicked) {
         this.deviceCursor = deviceCursor;
+        this.songInAllSongClicked = songInAllSongClicked;
         setHasStableIds(true);
     }
 
@@ -53,11 +60,16 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
                     bitmap,
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)),
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)));
+                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)),
+                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)));
+            // make singleTone list all_songs.
+            allSongsModelList.add(allSongsModel);
+            allSongsListRepository.setAllSongsList(allSongsModelList);
+
+            /////
             holder.mItemAllSongsSongsBinding.setAllSongsModel(allSongsModel);
             holder.mItemAllSongsSongsBinding.executePendingBindings();
         }
-
     }
 
     @Override
@@ -85,8 +97,17 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
 
             super(itemAllsongsSongsBinding.getRoot());
             this.mItemAllSongsSongsBinding = itemAllsongsSongsBinding;
-
+            mItemAllSongsSongsBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    songInAllSongClicked.songOnClick(getBindingAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface SongInAllSongsClicked {
+        void songOnClick(int position);
     }
 }
 

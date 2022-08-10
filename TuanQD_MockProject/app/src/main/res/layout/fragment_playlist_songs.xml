@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tuanqd.mockproject.songs.viewpager_songs.PlaylistSongsFragment">
+    tools:context="com.tuanqd.mockproject.songs.playlist.PlaylistSongsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

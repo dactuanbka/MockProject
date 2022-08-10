@@ -1,4 +1,4 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs.artist;
 
 import android.os.Bundle;
 
@@ -10,17 +10,19 @@ import android.view.ViewGroup;
 
 import com.example.baseproject.R;
 
-public class GenreFragment extends Fragment {
+public class ArtistFragment extends Fragment {
 
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
-
-    public GenreFragment() {
+    public ArtistFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static GenreFragment newInstance(String param1, String param2) {
-        GenreFragment fragment = new GenreFragment();
+    public static ArtistFragment newInstance(String param1, String param2) {
+        ArtistFragment fragment = new ArtistFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -37,6 +39,6 @@ public class GenreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_genre, container, false);
+        return inflater.inflate(R.layout.fragment_artist, container, false);
     }
 }

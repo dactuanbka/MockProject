@@ -1,6 +1,10 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs.allsongs;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.app.LoaderManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.baseproject.databinding.FragmentAllSongsBinding;
+import com.tuanqd.mockproject.mediaplayer.MusicService;
 
-public class AllSongsFragment extends Fragment {
+public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongInAllSongsClicked {
     private static final int LOADER_DEVICE_ID = 1;
     RecyclerView mRcvAllSongs;
-    Cursor mCursor;
-    boolean resume=false;
+    Intent intentAllSongs;
+
 
     AllSongsViewModel allSongsViewModel;
 
@@ -56,13 +62,42 @@ public class AllSongsFragment extends Fragment {
         }
         mRcvAllSongs = fragmentAllSongsBinding.recyclerViewAllSongs;
         mRcvAllSongs.setLayoutManager((new LinearLayoutManager(requireContext())));
+        registerBroadcast();
+
         return fragmentAllSongsBinding.getRoot();
     }
 
     @Override
     public void onResume() {
-        mRcvAllSongs.setAdapter(new AllSongsAdapter(allSongsViewModel.getCursorData()));
+        mRcvAllSongs.setAdapter(new AllSongsAdapter(allSongsViewModel.getCursorData(), this));
         super.onResume();
+    }
 
+    private void registerBroadcast() {
+        IntentFilter filter = new IntentFilter("statusMediaPlayer");
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(musicBroadcastReceiver, filter);
+        IntentFilter filter2 = new IntentFilter("remainTimer");
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(musicBroadcastReceiver, filter2);
+    }
+
+    private final BroadcastReceiver musicBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+// all song register for notification
+        }
+    };
+
+    @Override
+    public void songOnClick(int position) {
+        intentAllSongs = new Intent(requireContext(), MusicService.class);
+        intentAllSongs.putExtra("AllSongsStart", 1);
+        intentAllSongs.putExtra("positionAllSong", position);
+        requireContext().startService(intentAllSongs);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        requireContext().stopService(intentAllSongs);
     }
 }

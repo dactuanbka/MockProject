@@ -1,8 +1,14 @@
-package com.tuanqd.mockproject.songs.viewpager_songs;
+package com.tuanqd.mockproject.songs;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.tuanqd.mockproject.songs.albums.AlbumsFragment;
+import com.tuanqd.mockproject.songs.allsongs.AllSongsFragment;
+import com.tuanqd.mockproject.songs.artist.ArtistFragment;
+import com.tuanqd.mockproject.songs.genre.GenreFragment;
+import com.tuanqd.mockproject.songs.playlist.PlaylistSongsFragment;
 
 public class SongsPagerAdapter extends FragmentStateAdapter {
     private static final int NUM_PAGES = 5;

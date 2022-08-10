@@ -6,7 +6,7 @@
     <data>
         <variable
             name="AllSongsModel"
-            type="com.tuanqd.mockproject.songs.viewpager_songs.AllSongsModel" />
+            type="com.tuanqd.mockproject.songs.allsongs.AllSongsModel" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/img_thumbs_allSongs"
                 app:layout_constraintVertical_bias="0.428"
-                app:srcCompat="@drawable/ic_pause_music" />
+                app:srcCompat="@drawable/ic_play_music" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
