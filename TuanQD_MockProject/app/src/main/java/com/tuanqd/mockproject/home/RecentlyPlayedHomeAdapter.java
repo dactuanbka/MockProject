@@ -31,7 +31,7 @@ public class RecentlyPlayedHomeAdapter extends RecyclerView.Adapter<RecentlyPlay
     @Override
     public void onBindViewHolder(@NonNull RecentlyPlayedViewHolder holder, int position) {
         holder.itemRecentlyPlayedHomeBinding.
-                setRecentlyPlayedModel(recentlyPlayedHomeModelList.get(position));
+                setRecentlyPlayedHomeModel(recentlyPlayedHomeModelList.get(position));
         holder.itemRecentlyPlayedHomeBinding.executePendingBindings();
     }
 
@@ -49,6 +49,7 @@ public class RecentlyPlayedHomeAdapter extends RecyclerView.Adapter<RecentlyPlay
 
         public RecentlyPlayedViewHolder(@NonNull ItemRecentlyPlayedHomeBinding itemRecentlyPlayedHomeBinding) {
             super(itemRecentlyPlayedHomeBinding.getRoot());
+            this.itemRecentlyPlayedHomeBinding= itemRecentlyPlayedHomeBinding;
         }
     }
 }

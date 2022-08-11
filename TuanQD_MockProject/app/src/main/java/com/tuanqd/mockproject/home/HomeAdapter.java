@@ -1,5 +1,6 @@
 package com.tuanqd.mockproject.home;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,68 +10,63 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseproject.R;
-import com.example.baseproject.databinding.ItemHomeBinding;
+import com.example.baseproject.databinding.FragmentHomeBinding;
+import com.example.baseproject.databinding.ItemPlaylistHomeBinding;
+import com.example.baseproject.databinding.ItemRecentlyPlayedHomeBinding;
+import com.example.baseproject.databinding.ItemRecommendHomeBinding;
+import com.example.baseproject.databinding.RecyclerviewFragmentHomeBinding;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<HomeModel> homeModelList;
-    private RecyclerView.RecycledViewPool recycledViewPool_recommended = new RecyclerView.RecycledViewPool();
-    private RecyclerView.RecycledViewPool recycledViewPool_playlist = new RecyclerView.RecycledViewPool();
-    private RecyclerView.RecycledViewPool recycledViewPool_recentlyPlayed = new RecyclerView.RecycledViewPool();
+    Context context;
+    private static final int RECOMMENDED = 0;
+    private static final int PLAYLIST = 1;
+    private static final int RECENTLY_PLAYED = 2;
 
 
-    public HomeAdapter(List<HomeModel> homeModelList) {
+    public HomeAdapter(List<HomeModel> homeModelList, Context context) {
         this.homeModelList = homeModelList;
+        this.context = context;
     }
+
 
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemHomeBinding itemHomeBinding = DataBindingUtil.inflate(inflater,
-                R.layout.item_home, parent, false);
-        return new HomeViewHolder(itemHomeBinding);
+        RecyclerviewFragmentHomeBinding homeBinding = DataBindingUtil.inflate(
+                inflater, R.layout.recyclerview_fragment_home, parent, false);
+        return new HomeViewHolder(homeBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeModel homeModel = homeModelList.get(position);
-        LinearLayoutManager layoutManager_playlist = new LinearLayoutManager(
-                holder.itemHomeBinding.playlistRcvHome.getContext(),
-                LinearLayoutManager.HORIZONTAL, false);
-
-        LinearLayoutManager layoutManager_recommended = new LinearLayoutManager(
-                holder.itemHomeBinding.recommendedRcvHome.getContext(),
-                LinearLayoutManager.HORIZONTAL, false);
-
-        LinearLayoutManager layoutManager_recentlyPlayed = new LinearLayoutManager(
-                holder.itemHomeBinding.recentlyPlayedHome.getContext(),
-                LinearLayoutManager.VERTICAL, false);
-        /////////////
-        RecommendedAdapter recommendedAdapter = new RecommendedAdapter(homeModel.
-                getRecommendedHomeModelList());
-        PlaylistHomeAdapter playlistHomeAdapter = new PlaylistHomeAdapter(homeModel.
-                getPlaylistHomeModelList());
-        RecentlyPlayedHomeAdapter recentlyPlayedHomeAdapter = new RecentlyPlayedHomeAdapter(
-                homeModel.getRecentlyPlayedHomeModelList());
-///////////////////
-        holder.itemHomeBinding.recommendedRcvHome.setLayoutManager(layoutManager_recommended);
-        holder.itemHomeBinding.recommendedRcvHome.setAdapter(recommendedAdapter);
-        holder.itemHomeBinding.recommendedRcvHome.setHasFixedSize(true);
-        holder.itemHomeBinding.recommendedRcvHome.setRecycledViewPool(recycledViewPool_recommended);
-/////////////////////
-        holder.itemHomeBinding.playlistRcvHome.setLayoutManager(layoutManager_playlist);
-        holder.itemHomeBinding.playlistRcvHome.setAdapter(playlistHomeAdapter);
-        holder.itemHomeBinding.recommendedRcvHome.setHasFixedSize(true);
-        holder.itemHomeBinding.playlistRcvHome.setRecycledViewPool(recycledViewPool_playlist);
-/////////////////////
-        holder.itemHomeBinding.recentlyPlayedHome.setLayoutManager(layoutManager_recentlyPlayed);
-        holder.itemHomeBinding.recentlyPlayedHome.setAdapter(recentlyPlayedHomeAdapter);
-        holder.itemHomeBinding.recommendedRcvHome.setHasFixedSize(true);
-        holder.itemHomeBinding.recentlyPlayedHome.setRecycledViewPool(recycledViewPool_recentlyPlayed);
+        holder.homeBinding.recyclerViewHomeFragment.setAdapter((RecyclerView.Adapter) homeModel.getAdapter());
+        if (holder.getItemViewType() == RECOMMENDED || holder.getItemViewType() == PLAYLIST) {
+            holder.homeBinding.recyclerViewHomeFragment.setLayoutManager(new LinearLayoutManager(context,
+                    RecyclerView.HORIZONTAL, false));
+        } else {
+            holder.homeBinding.recyclerViewHomeFragment.setLayoutManager(new LinearLayoutManager(context,
+                    RecyclerView.VERTICAL, false));
+        }
+        holder.homeBinding.setHomeModel(homeModel);
+        holder.homeBinding.executePendingBindings();
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        if (homeModelList.get(position).getViewType() == 0) {
+            return RECOMMENDED;
+        } else {
+            if (homeModelList.get(position).getViewType() == 1) {
+                return PLAYLIST;
+            } else {
+                return RECENTLY_PLAYED;
+            }
+        }
+    }
 
     @Override
     public int getItemCount() {
@@ -80,12 +76,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return 0;
     }
 
-    public class HomeViewHolder extends RecyclerView.ViewHolder {
-        private final ItemHomeBinding itemHomeBinding;
+    public static class HomeViewHolder extends RecyclerView.ViewHolder {
+        private final RecyclerviewFragmentHomeBinding homeBinding;
 
-        public HomeViewHolder(@NonNull ItemHomeBinding itemHomeBinding) {
-            super(itemHomeBinding.getRoot());
-            this.itemHomeBinding = itemHomeBinding;
+        public HomeViewHolder(@NonNull RecyclerviewFragmentHomeBinding homeBinding) {
+            super(homeBinding.getRoot());
+            this.homeBinding = homeBinding;
         }
     }
+
 }

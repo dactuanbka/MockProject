@@ -30,7 +30,7 @@ public class PlaylistHomeAdapter extends RecyclerView.Adapter<PlaylistHomeAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PlaylistViewHolder holder, int position) {
-        holder.playlistHomeBinding.setPlaylistModel(playlistHomeModelList.get(position));
+        holder.playlistHomeBinding.setPlaylistHomeModel(playlistHomeModelList.get(position));
         holder.playlistHomeBinding.executePendingBindings();
     }
 

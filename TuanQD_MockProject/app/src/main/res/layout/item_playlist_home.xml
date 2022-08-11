@@ -1,62 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="playlistModel"
+            name="PlaylistHomeModel"
             type="com.tuanqd.mockproject.home.PlaylistHomeModel" />
     </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cartView_playlist"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-      >
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_playlist"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/black">
-            <ImageView
-                android:id="@+id/imgPlaylist"
-                android:layout_width="match_parent"
+            android:background="@color/background_mock"
+            android:padding="5dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgRecommendedList"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:background="@drawable/corner_image"
                 android:scaleType="fitXY"
-                android:layout_height="100dp"
-                app:imageResource="@{playlistModel.imageResource}"
-                app:layout_constraintBottom_toTopOf="@id/txtBigPlaylist"
+                app:imageResource="@{PlaylistHomeModel.imageResource}"
+                app:layout_constraintBottom_toTopOf="@id/txtBig_recommended"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintVertical_bias="0.0"
+                app:shapeAppearanceOverlay="@style/RectangleBorderImageStyle"
+                app:srcCompat="@drawable/anh_dep_home">
 
-            </ImageView>
+            </com.google.android.material.imageview.ShapeableImageView>
 
             <TextView
-                android:id="@+id/txtBigPlaylist"
+                android:id="@+id/txtBig_recommended"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@{playlistModel.bigText}"
-                android:textSize="20sp"
+                android:text="@{PlaylistHomeModel.bigText}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgPlaylist"
-                android:textColor="@color/white"/>
+                app:layout_constraintTop_toBottomOf="@+id/imgRecommendedList" />
 
             <TextView
-                android:id="@+id/txtSmallPlaylist"
+                android:id="@+id/txtSmallRecommendedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{playlistModel.smallText}"
-                app:layout_constraintEnd_toEndOf="@+id/txtBigPlaylist"
+                android:text="@{PlaylistHomeModel.smallText}"
+                android:textColor="@color/text_fade"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtBig_recommended"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/txtBigPlaylist"
-                app:layout_constraintTop_toBottomOf="@+id/txtBigPlaylist"
-                android:textColor="@color/white"/>
+                app:layout_constraintStart_toStartOf="@+id/txtBig_recommended"
+                app:layout_constraintTop_toBottomOf="@+id/txtBig_recommended" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

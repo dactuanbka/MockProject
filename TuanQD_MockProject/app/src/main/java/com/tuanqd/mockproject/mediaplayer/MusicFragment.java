@@ -14,13 +14,11 @@ public class MusicFragment extends Fragment {
     public MusicFragment() {
         // Required empty public constructor
     }
-
     // TODO: Rename and change types and number of parameters
     public static MusicFragment newInstance(String param1, String param2) {
         MusicFragment fragment = new MusicFragment();
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

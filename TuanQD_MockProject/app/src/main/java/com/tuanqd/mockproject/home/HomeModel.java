@@ -1,41 +1,50 @@
 package com.tuanqd.mockproject.home;
 
-import java.util.List;
-
 public class HomeModel {
-    private List<PlaylistHomeModel> playlistHomeModelList;
-    private List<RecommendedHomeModel> recommendedHomeModelList;
-    private List<RecentlyPlayedHomeModel> recentlyPlayedHomeModelList;
+    public static final int RECOMMENDED = 0;
+    public static final int PLAYLIST = 1;
+    public static final int RECENTLY_PLAYED = 2;
+    private int viewType;
+    private Object adapter;
+    private String nameArea;
+    private String viewAll;
 
-    public HomeModel(List<PlaylistHomeModel> playlistHomeModelList,
-                     List<RecommendedHomeModel> recommendedHomeModelList,
-                     List<RecentlyPlayedHomeModel> recentlyPlayedHomeModelList) {
-        this.playlistHomeModelList = playlistHomeModelList;
-        this.recommendedHomeModelList = recommendedHomeModelList;
-        this.recentlyPlayedHomeModelList = recentlyPlayedHomeModelList;
+    public HomeModel(int viewType, Object adapter, String nameArea, String viewAll) {
+        this.viewType = viewType;
+        this.adapter = adapter;
+        this.nameArea = nameArea;
+        this.viewAll = viewAll;
     }
 
-    public List<PlaylistHomeModel> getPlaylistHomeModelList() {
-        return playlistHomeModelList;
+    public String getNameArea() {
+        return nameArea;
     }
 
-    public void setPlaylistHomeModelList(List<PlaylistHomeModel> playlistHomeModelList) {
-        this.playlistHomeModelList = playlistHomeModelList;
+    public void setNameArea(String nameArea) {
+        this.nameArea = nameArea;
     }
 
-    public List<RecommendedHomeModel> getRecommendedHomeModelList() {
-        return recommendedHomeModelList;
+    public String getViewAll() {
+        return viewAll;
     }
 
-    public void setRecommendedHomeModelList(List<RecommendedHomeModel> recommendedHomeModelList) {
-        this.recommendedHomeModelList = recommendedHomeModelList;
+    public void setViewAll(String viewAll) {
+        this.viewAll = viewAll;
     }
 
-    public List<RecentlyPlayedHomeModel> getRecentlyPlayedHomeModelList() {
-        return recentlyPlayedHomeModelList;
+    public int getViewType() {
+        return viewType;
     }
 
-    public void setRecentlyPlayedHomeModelList(List<RecentlyPlayedHomeModel> recentlyPlayedHomeModelList) {
-        this.recentlyPlayedHomeModelList = recentlyPlayedHomeModelList;
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
+
+    public Object getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(Object adapter) {
+        this.adapter = adapter;
     }
 }

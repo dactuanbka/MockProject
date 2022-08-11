@@ -8,37 +8,17 @@
     android:layout_height="match_parent"
     tools:context="com.tuanqd.mockproject.songs.SongsFragment"
     android:id="@+id/songsFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background_mock">
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout_songs_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabTextAppearance="@style/MyCustomTextAppearance"
         app:tabSelectedTextColor="@color/icon_mock"
-        app:tabTextColor="@color/black">
+        app:tabTextColor="@color/white"
+        android:background="@color/background_mock">
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/all_songs" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/playlists" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/albums" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/artist" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/genre" />-->
     </com.google.android.material.tabs.TabLayout>
 <androidx.viewpager2.widget.ViewPager2
     android:id="@+id/pager_songs_fragment"

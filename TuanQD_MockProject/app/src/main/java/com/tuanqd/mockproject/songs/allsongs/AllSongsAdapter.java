@@ -54,6 +54,8 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
             byte[] rawBitmap = metadataRetriever.getEmbeddedPicture();
             if (rawBitmap != null) {
                 bitmap = BitmapFactory.decodeByteArray(rawBitmap, 0, rawBitmap.length, bfo);
+            }else{
+              bitmap= null;
             }
             AllSongsModel allSongsModel = new AllSongsModel(
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
@@ -65,13 +67,11 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
             // make singleTone list all_songs.
             allSongsModelList.add(allSongsModel);
             allSongsListRepository.setAllSongsList(allSongsModelList);
-
             /////
             holder.mItemAllSongsSongsBinding.setAllSongsModel(allSongsModel);
             holder.mItemAllSongsSongsBinding.executePendingBindings();
         }
     }
-
     @Override
     public int getItemCount() {
         Log.i("COUNT", "" + count);

@@ -31,7 +31,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
-        holder.itemRecommendHomeBinding.setRecommendedModel(recommendedHomeModelList.get(position));
+        holder.itemRecommendHomeBinding.setRecommendedHomeModel(recommendedHomeModelList.get(position));
         holder.itemRecommendHomeBinding.executePendingBindings();
     }
 

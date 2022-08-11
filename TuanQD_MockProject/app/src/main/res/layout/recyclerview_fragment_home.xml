@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="HomeModel"
+            type="com.tuanqd.mockproject.home.HomeModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_popup_menu_solid"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/txtTitle_recyclerView_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@{HomeModel.nameArea}"
+            android:textColor="@color/white"
+            tools:text="Hot Recommended" />
+
+        <TextView
+            android:id="@+id/txtViewAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:text="@{HomeModel.viewAll}"
+            android:textColor="@color/white" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_home_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtTitle_recyclerView_home"
+            android:layout_marginTop="10dp"
+            android:background="@color/background_mock"
+            android:orientation="horizontal"
+            apps:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_playlist_home" />
+    </RelativeLayout>
+</layout>

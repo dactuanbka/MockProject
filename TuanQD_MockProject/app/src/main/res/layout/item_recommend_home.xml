@@ -1,61 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="recommendedModel"
+            name="RecommendedHomeModel"
             type="com.tuanqd.mockproject.home.RecommendedHomeModel" />
     </data>
-   <androidx.cardview.widget.CardView
-       android:id="@+id/cardView_recommended"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_margin="5dp"
-       android:background="@color/black">
-       <androidx.constraintlayout.widget.ConstraintLayout
-           android:id="@+id/constraint_recommended"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:background="@color/black">
 
-           <ImageView
-               android:id="@+id/imgPlaylist"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               app:imageResource="@{recommendedModel.imageResource}"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintVertical_bias="0.0">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_recommended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background_mock">
 
-           </ImageView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_recommended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_mock"
+            android:padding="5dp">
 
-           <TextView
-               android:id="@+id/txtBigPlaylist"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="28dp"
-               android:text="@{recommendedModel.bigText}"
-               android:textSize="20sp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.0"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/imgPlaylist"
-               android:textColor="@color/white"/>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgRecommendedList"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:background="@drawable/corner_image"
+                android:scaleType="fitXY"
+                app:imageResource="@{RecommendedHomeModel.imageResource}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:shapeAppearanceOverlay="@style/RectangleBorderImageStyle"
+                app:srcCompat="@drawable/anh_dep_home">
 
-           <TextView
-               android:id="@+id/txtSmallPlaylist"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="8dp"
-               android:text="@{recommendedModel.smallText}"
-               app:layout_constraintEnd_toEndOf="@+id/txtBigPlaylist"
-               app:layout_constraintHorizontal_bias="0.0"
-               app:layout_constraintStart_toStartOf="@+id/txtBigPlaylist"
-               app:layout_constraintTop_toBottomOf="@+id/txtBigPlaylist"
-               android:textColor="@color/white"/>
+            </com.google.android.material.imageview.ShapeableImageView>
 
-       </androidx.constraintlayout.widget.ConstraintLayout>
-   </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/txtBig_recommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@{RecommendedHomeModel.bigText}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgRecommendedList" />
+
+            <TextView
+                android:id="@+id/txtSmallRecommendedList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{RecommendedHomeModel.smallText}"
+                android:textColor="@color/text_fade"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtBig_recommended"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtBig_recommended"
+                app:layout_constraintTop_toBottomOf="@+id/txtBig_recommended" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
