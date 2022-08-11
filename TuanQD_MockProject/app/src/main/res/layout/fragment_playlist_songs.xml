@@ -1,16 +1,78 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_mock"
+    android:orientation="vertical"
     tools:context="com.tuanqd.mockproject.songs.playlist.PlaylistSongsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_playlist_songs_fragment"
-        android:layout_gravity="center"
-        android:textSize="25sp"
-        android:textAlignment="center"/>
+        android:layout_marginTop="50dp">
 
-</FrameLayout>
+        <TableRow>
+
+            <ImageView
+                style="@style/imageView_tableLayout_style"
+                android:src="@drawable/ic_my_top_track" />
+
+            <ImageView
+                style="@style/imageView_tableLayout_style"
+                android:src="@drawable/ic_last_added" />
+        </TableRow>
+
+        <TableRow>
+
+            <ImageView
+                style="@style/imageView_tableLayout_style"
+                android:src="@drawable/ic_history" />
+
+            <ImageView
+                style="@style/imageView_tableLayout_style"
+                android:src="@drawable/ic_favourite" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            style="@style/imageView_tableLayout_style"
+            android:text="@string/my_playlist"
+            android:textColor="@color/white" />
+
+        <TextView
+            style="@style/imageView_tableLayout_style"
+            android:text="@string/view_all"
+            android:textAlignment="textEnd"
+            android:textColor="@color/icon_mock" />
+    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_playlist_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_button_add_playlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/black"
+        app:tint="@color/icon_mock"
+        android:layout_marginEnd="20dp"
+        app:srcCompat="@drawable/ic_add"
+        android:contentDescription="@string/add_playlist" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

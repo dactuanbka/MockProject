@@ -39,4 +39,12 @@
     <string name="hello_playlist_songs_fragment">Hello Playlist Songs Fragment</string>
     <string name="title">title</string>
     <string name="fragment_music">Fragment Music</string>
+    <string name="my_playlist">My Playlist</string>
+    <string name="add_playlist">add playlist</string>
+    <string name="display">Display</string>
+    <string name="audio">Audio</string>
+    <string name="headset">Headset</string>
+    <string name="lockscreen">Lockscreen</string>
+    <string name="advanced">Advanced</string>
+    <string name="other">Other</string>
 </resources>

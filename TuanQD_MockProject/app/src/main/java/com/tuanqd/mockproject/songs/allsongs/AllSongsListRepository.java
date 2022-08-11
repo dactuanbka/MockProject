@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AllSongsListRepository {
     private static AllSongsListRepository uniqueInstance;
-    private List<AllSongsModel> mAllSongsList;
+    private List<SongsModel> mAllSongsList;
     private AllSongsListRepository() {
 
     }
@@ -15,11 +15,11 @@ public class AllSongsListRepository {
         return uniqueInstance;
     }
 
-    public List<AllSongsModel> getAllSongsList() {
+    public List<SongsModel> getAllSongsList() {
         return mAllSongsList;
     }
 
-    public void setAllSongsList(List<AllSongsModel> mAllSongsList) {
+    public void setAllSongsList(List<SongsModel> mAllSongsList) {
         this.mAllSongsList = mAllSongsList;
     }
 }

@@ -17,9 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.tuanqd.mockproject.main.MainActivity;
 import com.tuanqd.mockproject.songs.allsongs.AllSongsListRepository;
-import com.tuanqd.mockproject.songs.allsongs.AllSongsModel;
+import com.tuanqd.mockproject.songs.allsongs.SongsModel;
 
 import java.io.IOException;
 
@@ -74,7 +73,7 @@ public class MusicService extends Service {
         }
     }
 
-    private void createNotification(AllSongsModel song) {
+    private void createNotification(SongsModel song) {
         Intent intentFragment = new Intent(this, MusicFragment.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
                 0, intentFragment, PendingIntent.FLAG_UPDATE_CURRENT);

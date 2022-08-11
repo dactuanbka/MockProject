@@ -26,7 +26,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
     int count = 0;
     AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
     SongInAllSongsClicked songInAllSongClicked;
-    List<AllSongsModel> allSongsModelList = new ArrayList<>();
+    List<SongsModel> allSongsModelList = new ArrayList<>();
 
     public AllSongsAdapter(Cursor deviceCursor, SongInAllSongsClicked songInAllSongClicked) {
         this.deviceCursor = deviceCursor;
@@ -57,7 +57,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
             }else{
               bitmap= null;
             }
-            AllSongsModel allSongsModel = new AllSongsModel(
+            SongsModel allSongsModel = new SongsModel(
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
                     bitmap,
                     deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),

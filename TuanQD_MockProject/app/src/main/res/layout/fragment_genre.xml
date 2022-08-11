@@ -1,16 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tuanqd.mockproject.songs.genre.GenreFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_genre_fragment"
-        android:layout_gravity="center"
-        android:textSize="25sp"
-        android:textAlignment="center"/>
-
-</FrameLayout>
+    tools:context="com.tuanqd.mockproject.songs.genre.GenreFragment"
+    android:paddingStart="20dp"
+    android:paddingEnd="5dp">
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_view_genres"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:layout_height="match_parent">
+</androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
+</layout>

@@ -2,7 +2,7 @@ package com.tuanqd.mockproject.songs.allsongs;
 
 import android.graphics.Bitmap;
 
-public class AllSongsModel {
+public class SongsModel {
     private String ID;
     private Bitmap bitmap;
     private String title;
@@ -10,7 +10,7 @@ public class AllSongsModel {
     private String duration;
     private String musicPath;
 
-    public AllSongsModel(String ID, Bitmap bitmap, String title, String artist, String duration, String musicPath) {
+    public SongsModel(String ID, Bitmap bitmap, String title, String artist, String duration, String musicPath) {
         this.ID = ID;
         this.bitmap = bitmap;
         this.title = title;
