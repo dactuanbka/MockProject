@@ -47,4 +47,11 @@
     <string name="lockscreen">Lockscreen</string>
     <string name="advanced">Advanced</string>
     <string name="other">Other</string>
+    <string name="top_albums">Top Albums</string>
+    <string name="file_dragon">File Dragon</string>
+    <string name="_2019">2019</string>
+    <string name="_2018">2018</string>
+    <string name="sound_of_life">Sound of Life</string>
+    <string name="giving_heart">Giving Heart</string>
+    <string name="_2017">2017</string>
 </resources>

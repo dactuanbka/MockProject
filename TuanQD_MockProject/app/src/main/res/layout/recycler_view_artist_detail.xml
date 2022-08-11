@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="HomeModel"
-            type="com.tuanqd.mockproject.home.HomeModel" />
+            name="ArtistDetailsModel"
+            type="com.tuanqd.mockproject.songs.artist.ArtistDetailsModel" />
     </data>
 
     <RelativeLayout
@@ -22,21 +22,21 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="@{HomeModel.nameArea}"
+            android:text="@{ArtistDetailsModel.titleArtistDetail}"
             android:textColor="@color/white"
             tools:text="Hot Recommended" />
 
         <TextView
-            android:id="@+id/txtViewAll"
+            android:id="@+id/txtViewAll_artist_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:text="@{HomeModel.viewAll}"
+            android:text="@{ArtistDetailsModel.viewAllArtistDetail}"
             android:textColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_home_fragment"
+            android:id="@+id/recycler_view_artist_details_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtTitle_recyclerView_artist_details"

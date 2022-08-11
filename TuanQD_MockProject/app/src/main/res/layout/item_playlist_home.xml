@@ -23,13 +23,13 @@
             android:padding="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgRecommendedList"
+                android:id="@+id/imgTopAlbumsList"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:background="@drawable/corner_image"
                 android:scaleType="fitXY"
                 app:imageResource="@{PlaylistHomeModel.imageResource}"
-                app:layout_constraintBottom_toTopOf="@id/txtBig_recommended"
+                app:layout_constraintBottom_toTopOf="@id/txt_item0_topAlbums"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
             </com.google.android.material.imageview.ShapeableImageView>
 
             <TextView
-                android:id="@+id/txtBig_recommended"
+                android:id="@+id/txt_item0_topAlbums"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -50,7 +50,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgRecommendedList" />
+                app:layout_constraintTop_toBottomOf="@+id/imgTopAlbumsList" />
 
             <TextView
                 android:id="@+id/txtSmallRecommendedList"
@@ -60,10 +60,10 @@
                 android:text="@{PlaylistHomeModel.smallText}"
                 android:textColor="@color/text_fade"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtBig_recommended"
+                app:layout_constraintEnd_toEndOf="@+id/txt_item0_topAlbums"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/txtBig_recommended"
-                app:layout_constraintTop_toBottomOf="@+id/txtBig_recommended" />
+                app:layout_constraintStart_toStartOf="@+id/txt_item0_topAlbums"
+                app:layout_constraintTop_toBottomOf="@+id/txt_item0_topAlbums" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
