@@ -1,8 +1,7 @@
-package com.tuanqd.mockproject.songs.artist;
+package com.tuanqd.mockproject.songs.artist.artistdetails;
 
 import android.os.Bundle;
 
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.baseproject.R;
 import com.example.baseproject.databinding.FragmentArtistDetailsBinding;
 
 public class ArtistDetailsFragment extends Fragment {

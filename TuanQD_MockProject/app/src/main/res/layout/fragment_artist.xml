@@ -1,15 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tuanqd.mockproject.songs.artist.ArtistFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_artist_fragment"
-        android:layout_gravity="center"
-        android:textSize="25sp"
-        android:textAlignment="center"/>
-</FrameLayout>
+    tools:context="com.tuanqd.mockproject.songs.artist.ArtistFragment"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+   android:layout_marginTop="20dp">
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+</LinearLayout>
+</layout>

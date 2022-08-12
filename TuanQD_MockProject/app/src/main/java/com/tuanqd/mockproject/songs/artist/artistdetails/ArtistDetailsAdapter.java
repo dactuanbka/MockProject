@@ -1,6 +1,6 @@
-package com.tuanqd.mockproject.songs.artist;
+package com.tuanqd.mockproject.songs.artist.artistdetails;
 
-import static com.tuanqd.mockproject.songs.artist.ArtistDetailsModel.TOP_ALBUMS;
+import static com.tuanqd.mockproject.songs.artist.artistdetails.ArtistDetailsModel.TOP_ALBUMS;
 
 import android.content.Context;
 import android.view.LayoutInflater;

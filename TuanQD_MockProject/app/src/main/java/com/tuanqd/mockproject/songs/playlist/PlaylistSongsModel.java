@@ -2,15 +2,17 @@ package com.tuanqd.mockproject.songs.playlist;
 
 import android.graphics.Bitmap;
 
-import com.tuanqd.mockproject.songs.allsongs.SongsModel;
+import com.tuanqd.mockproject.main.SongsModel;
 
 public class PlaylistSongsModel extends SongsModel {
     private String namePlaylist;
 
-    public PlaylistSongsModel(String ID, Bitmap bitmap, String title, String artist, String duration, String musicPath, String namePlaylist) {
-        super(ID, bitmap, title, artist, duration, musicPath);
-        this.namePlaylist = namePlaylist;
+    public PlaylistSongsModel(String ID, Bitmap bitmapSong, String title, String artist, String albumId,
+                              String album, String duration, String musicPath,String namePlaylist) {
+        super(ID, bitmapSong, title, artist, albumId, album, duration, musicPath);
+        this.namePlaylist= namePlaylist;
     }
+
 
     public String getNamePlaylist() {
         return namePlaylist;

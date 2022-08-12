@@ -1,4 +1,4 @@
-package com.tuanqd.mockproject.songs.artist;
+package com.tuanqd.mockproject.songs.artist.artistdetails;
 
 public class ArtistDetailsModel {
     private int viewType;

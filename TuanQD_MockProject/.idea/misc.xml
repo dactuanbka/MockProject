@@ -13,6 +13,7 @@
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_home.xml" value="0.193" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_home_checked.xml" value="0.1" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_home_unchecked.xml" value="0.1" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_icon_menu_popup_artist.xml" value="0.327" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_more_topsongs_artist_details.xml" value="0.266" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_next_24.xml" value="0.1" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/drawable/ic_pause_music.xml" value="0.2975" />
@@ -48,6 +49,7 @@
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/fragment_songs.xml" value="0.1" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/header_navigation_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/item_allsongs_songs.xml" value="0.22" />
+        <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/item_artist_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/item_genres.xml" value="0.365625" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/item_home.xml" value="0.2586050724637681" />
         <entry key="..\:/Users/Tuan-PC/AndroidStudioProjects/Assignment_file/MockProject/TuanQD_MockProject/app/src/main/res/layout/item_playlist_home.xml" value="0.6962025316455697" />

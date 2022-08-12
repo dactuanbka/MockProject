@@ -8,7 +8,7 @@
 
     android:background="@color/background_mock"
     android:orientation="vertical"
-    tools:context="com.tuanqd.mockproject.songs.artist.ArtistDetailsFragment">
+    tools:context="com.tuanqd.mockproject.songs.artist.artistdetails.ArtistDetailsFragment">
 
     <ImageView
         android:id="@+id/imageView"

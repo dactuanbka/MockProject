@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
         <variable
-            name="AllSongsModel"
-            type="com.tuanqd.mockproject.main.SongsModel" />
+            name="ArtistModel"
+            type="com.tuanqd.mockproject.songs.artist.ArtistModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -27,47 +25,67 @@
             android:background="@color/background_mock">
 
             <ImageView
-                android:id="@+id/img_thumbs_allSongs"
+                android:id="@+id/img_artist"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:imageBitmap="@{AllSongsModel.bitmapSong}" />
+                bind:imageBitmap="@{ArtistModel.imageArtist}"
+                android:src="@drawable/anh_dep_home"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/stroke_popup_menu">
+
                 <TextView
-                    android:id="@+id/txtArtist"
-                    android:layout_width="150dp"
+                    android:id="@+id/txtArtist_Artist"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:ellipsize="end"
+                    android:hint="Artist"
                     android:maxLength="30"
                     android:maxLines="1"
-                    android:text="@{AllSongsModel.title}"
+                    android:text="@{ArtistModel.titleArtist}"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
-                    android:id="@+id/txtNumberAlbums"
+                    android:id="@+id/txtNumberAlbums_Artist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{AllSongsModel.artist}"
+                    android:hint="numberAlbums"
+                    android:text="@{ArtistModel.numberAlbums}"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/txtArtist"
+                    app:layout_constraintEnd_toEndOf="@+id/txtArtist_Artist"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/txtArtist"
-                    app:layout_constraintTop_toBottomOf="@+id/txtArtist"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintStart_toStartOf="@+id/txtArtist_Artist"
+                    app:layout_constraintTop_toBottomOf="@+id/txtArtist_Artist"
+                    app:layout_constraintVertical_bias="0.12" />
+
+                <TextView
+                    android:id="@+id/txtNumberSongs_Artist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{ArtistModel.numberAlbums}"
+                    android:hint="numberSongs"
+                    android:textColorHint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtNumberAlbums_Artist"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.50"
+                    app:layout_constraintStart_toEndOf="@+id/txtNumberAlbums_Artist"
+                    app:layout_constraintTop_toTopOf="@+id/txtNumberAlbums_Artist" />
 
                 <ImageView
                     android:id="@+id/img_popup_menu_artist"
@@ -76,7 +94,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_play_music" />
+                    app:layout_constraintVertical_bias="0"
+                    app:srcCompat="@drawable/ic_menu_popup_artist" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

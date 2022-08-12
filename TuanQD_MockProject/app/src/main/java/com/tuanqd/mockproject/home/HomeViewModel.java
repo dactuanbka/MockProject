@@ -1,6 +1,16 @@
 package com.tuanqd.mockproject.home;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.MediaStore;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.example.baseproject.R;
 
@@ -13,6 +23,8 @@ public class HomeViewModel extends ViewModel {
     private List<PlaylistHomeModel> playlistHomeModelList;
     private List<RecentlyPlayedHomeModel> recentlyPlayedHomeModelList;
     private HomeModel homeModel;
+    Context mContext;
+    private Cursor mData;
 
     public void setData() {
         // set for Recommended list
@@ -64,6 +76,5 @@ public class HomeViewModel extends ViewModel {
     public HomeModel getHomeModel() {
         return homeModel;
     }
-
 
 }

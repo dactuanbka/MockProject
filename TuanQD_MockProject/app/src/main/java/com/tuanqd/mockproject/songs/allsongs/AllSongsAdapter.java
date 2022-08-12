@@ -1,11 +1,5 @@
 package com.tuanqd.mockproject.songs.allsongs;
 
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaMetadataRetriever;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseproject.R;
 import com.example.baseproject.databinding.ItemAllsongsSongsBinding;
+import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+import com.tuanqd.mockproject.main.SongsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSongsViewHolder> {
-    private Cursor deviceCursor;
-    Bitmap bitmap = null;
-    int count = 0;
     AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
     SongInAllSongsClicked songInAllSongClicked;
-    List<SongsModel> allSongsModelList = new ArrayList<>();
+    List<SongsModel> allSongsModelList;
 
-    public AllSongsAdapter(Cursor deviceCursor, SongInAllSongsClicked songInAllSongClicked) {
-        this.deviceCursor = deviceCursor;
+    public AllSongsAdapter(SongInAllSongsClicked songInAllSongClicked, List<SongsModel> allSongsModelList) {
         this.songInAllSongClicked = songInAllSongClicked;
-        setHasStableIds(true);
+        this.allSongsModelList = allSongsModelList;
     }
 
     @NonNull
@@ -45,59 +36,26 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
 
     @Override
     public void onBindViewHolder(@NonNull AllSongsViewHolder holder, int position) {
-        if (deviceCursor != null && deviceCursor.moveToPosition(position)) {
-            String img = deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
-            MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
-            BitmapFactory.Options bfo = new BitmapFactory.Options();
-            Log.i("TAG", "" + img);
-            metadataRetriever.setDataSource(img);
-            byte[] rawBitmap = metadataRetriever.getEmbeddedPicture();
-            if (rawBitmap != null) {
-                bitmap = BitmapFactory.decodeByteArray(rawBitmap, 0, rawBitmap.length, bfo);
-            }else{
-              bitmap= null;
-            }
-            SongsModel allSongsModel = new SongsModel(
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
-                    bitmap,
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)),
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)),
-                    deviceCursor.getString(deviceCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)));
-            // make singleTone list all_songs.
-            allSongsModelList.add(allSongsModel);
-            allSongsListRepository.setAllSongsList(allSongsModelList);
-            /////
-            holder.mItemAllSongsSongsBinding.setAllSongsModel(allSongsModel);
-            holder.mItemAllSongsSongsBinding.executePendingBindings();
-        }
+        holder.allSongBinding.setAllSongsModel(allSongsModelList.get(position));
+        holder.allSongBinding.executePendingBindings();
     }
+
     @Override
     public int getItemCount() {
-        Log.i("COUNT", "" + count);
-        if (deviceCursor != null) {
-            return deviceCursor.getCount();
+        if (allSongsModelList != null) {
+            return allSongsModelList.size();
         } else {
             return 0;
         }
     }
-
-    public void swapCursor(Cursor newDeviceCursor) {
-        if (deviceCursor != null) {
-            deviceCursor.close();
-            deviceCursor = newDeviceCursor;
-            notifyDataSetChanged();
-        }
-    }
-
     public class AllSongsViewHolder extends RecyclerView.ViewHolder {
-        private ItemAllsongsSongsBinding mItemAllSongsSongsBinding;
+        private ItemAllsongsSongsBinding allSongBinding;
 
-        public AllSongsViewHolder(@NonNull ItemAllsongsSongsBinding itemAllsongsSongsBinding) {
+        public AllSongsViewHolder(@NonNull ItemAllsongsSongsBinding allSongBinding) {
 
-            super(itemAllsongsSongsBinding.getRoot());
-            this.mItemAllSongsSongsBinding = itemAllsongsSongsBinding;
-            mItemAllSongsSongsBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            super(allSongBinding.getRoot());
+            this.allSongBinding = allSongBinding;
+            allSongBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     songInAllSongClicked.songOnClick(getBindingAdapterPosition());

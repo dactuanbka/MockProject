@@ -5,7 +5,7 @@
     <data>
         <variable
             name="TopSongsModel"
-            type="com.tuanqd.mockproject.songs.artist.TopSongsModel" />
+            type="com.tuanqd.mockproject.songs.artist.artistdetails.TopSongsModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

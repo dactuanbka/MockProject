@@ -1,22 +1,43 @@
-package com.tuanqd.mockproject.songs.allsongs;
+package com.tuanqd.mockproject.main;
 
 import android.graphics.Bitmap;
 
 public class SongsModel {
     private String ID;
-    private Bitmap bitmap;
+    private Bitmap bitmapSong;
     private String title;
     private String artist;
+    private String albumId;
+    private String album;
     private String duration;
     private String musicPath;
 
-    public SongsModel(String ID, Bitmap bitmap, String title, String artist, String duration, String musicPath) {
+    public SongsModel(String ID, Bitmap bitmapSong, String title, String artist, String albumId,
+                      String album, String duration, String musicPath) {
         this.ID = ID;
-        this.bitmap = bitmap;
+        this.bitmapSong = bitmapSong;
         this.title = title;
         this.artist = artist;
+        this.albumId = albumId;
+        this.album = album;
         this.duration = duration;
-        this.musicPath=musicPath;
+        this.musicPath = musicPath;
+    }
+
+    public String getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(String albumId) {
+        this.albumId = albumId;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
     }
 
     public String getMusicPath() {
@@ -27,12 +48,12 @@ public class SongsModel {
         this.musicPath = musicPath;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public Bitmap getBitmapSong() {
+        return bitmapSong;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setBitmapSong(Bitmap bitmapSong) {
+        this.bitmapSong = bitmapSong;
     }
 
     public String getID() {

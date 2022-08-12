@@ -1,8 +1,6 @@
-package com.tuanqd.mockproject.songs.artist;
+package com.tuanqd.mockproject.songs.artist.artistdetails;
 
-import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

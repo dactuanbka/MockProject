@@ -17,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.tuanqd.mockproject.songs.allsongs.AllSongsListRepository;
-import com.tuanqd.mockproject.songs.allsongs.SongsModel;
+import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+import com.tuanqd.mockproject.main.SongsModel;
 
 import java.io.IOException;
 
@@ -87,7 +87,7 @@ public class MusicService extends Service {
         RemoteViews remoteView = new RemoteViews(getPackageName(), R.layout.notification_music_layout);
         remoteView.setTextViewText(R.id.tv_title, song.getTitle());
         remoteView.setTextViewText(R.id.tv_artist, song.getArtist());
-        remoteView.setImageViewBitmap(R.id.image_thumbs_notification, song.getBitmap());
+        remoteView.setImageViewBitmap(R.id.image_thumbs_notification, song.getBitmapSong());
         remoteView.setImageViewResource(R.id.exit_notification_button, R.drawable.ic_cancel_24);
         remoteView.setImageViewResource(R.id.img_next_notification_button, R.drawable.ic_next_24);
         remoteView.setImageViewResource(R.id.img_prev_notification_button, R.drawable.ic_previous_24);

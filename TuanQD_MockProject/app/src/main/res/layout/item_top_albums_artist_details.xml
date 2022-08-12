@@ -7,7 +7,7 @@
 
         <variable
             name="TopAlbumsModel"
-            type="com.tuanqd.mockproject.songs.artist.TopAlbumsModel" />
+            type="com.tuanqd.mockproject.songs.artist.artistdetails.TopAlbumsModel" />
     </data>
 
     <androidx.cardview.widget.CardView

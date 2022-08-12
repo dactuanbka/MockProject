@@ -1,4 +1,6 @@
-package com.tuanqd.mockproject.songs.allsongs;
+package com.tuanqd.mockproject.home.repository;
+
+import com.tuanqd.mockproject.main.SongsModel;
 
 import java.util.List;
 

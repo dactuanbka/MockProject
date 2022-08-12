@@ -51,6 +51,8 @@ public class AllSongsViewModel extends AndroidViewModel implements LoaderManager
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.DURATION
         };
         loader = new CursorLoader(mContext,
