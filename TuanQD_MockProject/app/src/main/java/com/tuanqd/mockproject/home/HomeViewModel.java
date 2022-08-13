@@ -30,7 +30,7 @@ public class HomeViewModel extends ViewModel {
         // set for Recommended list
         homeModelList = new ArrayList<>();
         homeModel = new HomeModel(HomeModel.RECOMMENDED, RecommendedAdapter(),
-                "Hot Recommended",  "");
+                "Hot Recommended", "");
         homeModelList.add(homeModel);
         // set for Playlist list
 
@@ -46,26 +46,37 @@ public class HomeViewModel extends ViewModel {
 
     private RecommendedAdapter RecommendedAdapter() {
         recommendedHomeModelList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            recommendedHomeModelList.add(new RecommendedHomeModel(R.drawable.anh_dep_home, "Sound of Sky", "Dilon Bruce"));
-        }
+        recommendedHomeModelList.add(new RecommendedHomeModel(R.drawable.thumbail, "Sound of Sky", "Dilon Bruce"));
+        recommendedHomeModelList.add(new RecommendedHomeModel(R.drawable.thumbail, "Sound of Sky", "Dilon Bruce"));
+        recommendedHomeModelList.add(new RecommendedHomeModel(R.drawable.thumbail, "Sound of Sky", "Dilon Bruce"));
+        recommendedHomeModelList.add(new RecommendedHomeModel(R.drawable.thumbail, "Sound of Sky", "Dilon Bruce"));
         return new RecommendedAdapter(recommendedHomeModelList);
     }
 
     private RecentlyPlayedHomeAdapter RecentlyPlayedAdapter() {
         recentlyPlayedHomeModelList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+
             recentlyPlayedHomeModelList.add(new RecentlyPlayedHomeModel(R.drawable.ic_play_music,
-                    "Earth Song", "Michael Jackson",R.drawable.ic_heart,R.drawable.ic_group_rate ));
-        }
+                    "Earth Song", "Michael Jackson", R.drawable.ic_heart, R.drawable.ic_group_rate));
+        recentlyPlayedHomeModelList.add(new RecentlyPlayedHomeModel(R.drawable.ic_play_music,
+                "My Love", "WestLife", R.drawable.ic_heart, R.drawable.ic_group_rate));
+        recentlyPlayedHomeModelList.add(new RecentlyPlayedHomeModel(R.drawable.ic_play_music,
+                "Unstoppable", "Sia", R.drawable.ic_heart, R.drawable.ic_group_rate));
+        recentlyPlayedHomeModelList.add(new RecentlyPlayedHomeModel(R.drawable.ic_play_music,
+                "Faded", "Alan Walker", R.drawable.ic_heart, R.drawable.ic_group_rate));
+        recentlyPlayedHomeModelList.add(new RecentlyPlayedHomeModel(R.drawable.ic_play_music,
+                "Heal the World", "Michael Jackson", R.drawable.ic_heart, R.drawable.ic_group_rate));
         return new RecentlyPlayedHomeAdapter(recentlyPlayedHomeModelList);
     }
 
     private PlaylistHomeAdapter PlaylistAdapter() {
         playlistHomeModelList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.anh_dep_home, "Classic Playlist", "piano"));
-        }
+
+        playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.album_zing2jpg, "Classic Playlist", "piano"));
+        playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.classic_music, "Summer Playlist", "Dilon Bruce"));
+        playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.classic_music2, "Pop Music", "Michael Jackson"));
+        playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.album_zing, "Faded Playlist", "Alan Walker"));
+        playlistHomeModelList.add(new PlaylistHomeModel(R.drawable.thumbai_zing, "Love Playlist", "WestLife"));
         return new PlaylistHomeAdapter(playlistHomeModelList);
     }
 

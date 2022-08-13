@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/ic_play_music" />
 
         <TextView
-            android:id="@+id/title_top_song"
+            android:id="@+id/title_song_artist_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -38,21 +38,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/duration_top_song"
+            android:id="@+id/duration_song_artist_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:text="@{RecentlyPlayedHomeModel.singer}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/title_top_song"
+            app:layout_constraintEnd_toEndOf="@+id/title_song_artist_detail"
             app:layout_constraintHorizontal_bias="0.0"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/title_top_song"
-            app:layout_constraintTop_toBottomOf="@+id/title_top_song"
+            app:layout_constraintStart_toStartOf="@+id/title_song_artist_detail"
+            app:layout_constraintTop_toBottomOf="@+id/title_song_artist_detail"
             app:layout_constraintVertical_bias="0.01" />
 
         <ImageView
-            android:id="@+id/img_menu_top_song"
+            android:id="@+id/img_menu_playWave_artist_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
@@ -72,9 +72,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:imageResource="@{RecentlyPlayedHomeModel.rateImageRes}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_menu_top_song"
+            app:layout_constraintTop_toBottomOf="@+id/img_menu_playWave_artist_detail"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/img_menu_top_song"
+            app:layout_constraintStart_toStartOf="@+id/img_menu_playWave_artist_detail"
             app:srcCompat="@drawable/ic_group_rate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

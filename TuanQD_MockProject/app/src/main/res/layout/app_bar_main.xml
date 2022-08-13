@@ -16,11 +16,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/purple_700"
             android:layout_marginTop="0dp"
+            android:background="@color/background_mock"
             android:elevation="0dp"
             app:navigationIcon="@drawable/ic_burger_menu"
-            app:titleCentered="true"/>
+            app:theme="@style/ToolbarTheme"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

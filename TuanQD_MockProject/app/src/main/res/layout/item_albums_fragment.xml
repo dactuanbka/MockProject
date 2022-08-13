@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bindAlbum="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="AlbumModel"
+            type="com.tuanqd.mockproject.songs.albums.AlbumModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_mock">
+
+        <ImageView
+            android:id="@+id/imgAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/thumbai_zing"
+            bindAlbum:imageUrl="@{AlbumModel.imgAlbumUri}" />
+
+        <TextView
+            android:id="@+id/txtAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:hint="nameAlbum"
+            android:text="@{AlbumModel.titleAlbum}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgAlbum" />
+
+        <TextView
+            android:id="@+id/txtArtist_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/artist"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:text="@{AlbumModel.artist}"
+            android:textColor="@color/text_fade"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtAlbum"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txtAlbum"
+            app:layout_constraintTop_toBottomOf="@+id/txtAlbum" />
+
+        <ImageView
+            android:id="@+id/img_popupmenu_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_popup_artist"
+            app:layout_constraintBottom_toBottomOf="@+id/txtAlbum"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtAlbum"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtNumberAlbums_album"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="35dp"
+            android:hint="01"
+            android:text="@{String.valueOf(AlbumModel.numberOfSongs)}"
+            android:textColor="@color/text_fade"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtArtist_album"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtArtist_album"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtSongs_album"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Songs"
+            android:textColor="@color/text_fade"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtNumberAlbums_album"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/txtNumberAlbums_album"
+            app:layout_constraintTop_toTopOf="@+id/txtNumberAlbums_album"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

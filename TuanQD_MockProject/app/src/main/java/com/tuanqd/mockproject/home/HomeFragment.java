@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment {
                 RecyclerView.VERTICAL, false);
         fragmentHomeBinding.recyclerViewHome.setLayoutManager(vLayoutManager);
         homeViewModel.setData();
-        HomeAdapter homeAdapter = new HomeAdapter(homeViewModel.getHomeModelList(),requireContext());
+        HomeAdapter homeAdapter = new HomeAdapter(homeViewModel.getHomeModelList(), requireContext());
         fragmentHomeBinding.recyclerViewHome.setAdapter(homeAdapter);
         return fragmentHomeBinding.getRoot();
     }

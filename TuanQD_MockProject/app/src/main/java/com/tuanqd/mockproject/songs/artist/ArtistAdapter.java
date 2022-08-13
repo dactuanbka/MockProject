@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +12,11 @@ import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseproject.R;
 import com.example.baseproject.databinding.ItemArtistFragmentBinding;
 import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
-
-import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
     //    List<ArtistModel> artistModelList;
@@ -29,10 +24,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     Cursor artistCursor;
     Context mContext;
     PopupMenu popupMenu;
-    clickItemMenu clickItemMenu;
+    ClickItemMenu clickItemMenu;
     Bitmap artistBitmap = null;
 
-    public ArtistAdapter(Cursor artistCursor, Context mContext, ArtistAdapter.clickItemMenu clickItemMenu) {
+    public ArtistAdapter(Cursor artistCursor, Context mContext, ClickItemMenu clickItemMenu) {
         this.artistCursor = artistCursor;
         this.mContext = mContext;
         this.clickItemMenu = clickItemMenu;
@@ -60,13 +55,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             ArtistModel artistModel = new ArtistModel(getArtistBitmap(artistCursor), artist, numberAlbum, numberSongs);
             holder.artistFragmentBinding.setArtistModel(artistModel);
             holder.artistFragmentBinding.executePendingBindings();
-        }
+
         holder.artistFragmentBinding.imgPopupMenuArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupMenu = new PopupMenu(mContext,
                         holder.artistFragmentBinding.imgPopupMenuArtist);
-                popupMenu.getMenuInflater().inflate(R.menu.menu_popup_artist, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.menu_popup_artist_album, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -79,6 +74,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
                 popupMenu.show();
             }
         });
+    }
     }
 
     @Override
@@ -105,12 +101,12 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         return artistBitmap;
     }
 
-    public interface clickItemMenu {
+    public interface ClickItemMenu {
         void itemPopupClick();
     }
 
     class ArtistViewHolder extends RecyclerView.ViewHolder {
-        private ItemArtistFragmentBinding artistFragmentBinding;
+        private final ItemArtistFragmentBinding artistFragmentBinding;
 
         public ArtistViewHolder(@NonNull ItemArtistFragmentBinding artistFragmentBinding) {
             super(artistFragmentBinding.getRoot());

@@ -13,21 +13,17 @@ import androidx.loader.app.LoaderManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.baseproject.R;
 import com.example.baseproject.databinding.FragmentArtistBinding;
-import com.tuanqd.mockproject.main.SongsModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ArtistFragment extends Fragment implements ArtistAdapter.clickItemMenu {
+public class ArtistFragment extends Fragment implements ArtistAdapter.ClickItemMenu {
     private static final int LOADER_DEVICE_ID2 = 2;
     Cursor artistCursor;
+
     public ArtistFragment() {
         // Required empty public constructor
     }
@@ -55,18 +51,18 @@ public class ArtistFragment extends Fragment implements ArtistAdapter.clickItemM
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
             LoaderManager.getInstance(this).initLoader(LOADER_DEVICE_ID2, null, artistViewModel);
-        }
-        artistViewModel.getFinishLoader().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    artistCursor = artistViewModel.getArtistCursor();
-                    fragmentArtistBinding.recyclerViewArtist.setLayoutManager(new LinearLayoutManager(requireContext()));
-                    fragmentArtistBinding.recyclerViewArtist.setAdapter(new ArtistAdapter(artistCursor,
-                            requireContext(), ArtistFragment.this));
+            artistViewModel.getFinishLoaderArtist().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean aBoolean) {
+                    if (aBoolean) {
+                        artistCursor = artistViewModel.getArtistCursor();
+                        fragmentArtistBinding.recyclerViewArtist.setLayoutManager(new LinearLayoutManager(requireContext()));
+                        fragmentArtistBinding.recyclerViewArtist.setAdapter(new ArtistAdapter(artistCursor,
+                                requireContext(), ArtistFragment.this));
+                    }
                 }
-            }
-        });
+            });
+        }
         return fragmentArtistBinding.getRoot();
     }
 

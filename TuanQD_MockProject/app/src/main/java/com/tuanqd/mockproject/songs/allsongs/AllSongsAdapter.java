@@ -48,6 +48,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
             return 0;
         }
     }
+
     public class AllSongsViewHolder extends RecyclerView.ViewHolder {
         private ItemAllsongsSongsBinding allSongBinding;
 

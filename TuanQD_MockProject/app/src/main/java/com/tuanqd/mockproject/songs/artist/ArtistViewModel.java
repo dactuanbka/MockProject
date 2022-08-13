@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -19,20 +18,17 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
-import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistViewModel extends AndroidViewModel implements LoaderManager.LoaderCallbacks<Cursor> {
     private List<ArtistModel> artistModeTemplList = new ArrayList<>();
     Cursor artistCursor;
-    Bitmap bitmapArtist;
     Context mContext;
     int position = 0;
-    private MutableLiveData<Boolean> finishLoader= new MutableLiveData<>();
-    public LiveData<Boolean> getFinishLoader(){
-        return finishLoader;
+    private MutableLiveData<Boolean> finishLoaderArtist = new MutableLiveData<>();
+    public LiveData<Boolean> getFinishLoaderArtist(){
+        return finishLoaderArtist;
     }
 
     public ArtistViewModel(@NonNull Application application) {
@@ -48,7 +44,7 @@ public class ArtistViewModel extends AndroidViewModel implements LoaderManager.L
         this.artistCursor = artistCursor;
     }
 
-    @BindingAdapter("bind:imageBitmap")
+    @BindingAdapter("bindArtist:imageBitmap")
     public static void loadImageArtist(ImageView img, Bitmap bitmap) {
         img.setImageBitmap(bitmap);
     }
@@ -73,8 +69,7 @@ public class ArtistViewModel extends AndroidViewModel implements LoaderManager.L
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         setArtistCursor(data);
-        finishLoader.setValue(true);
-
+        finishLoaderArtist.setValue(true);
     }
 
     @Override

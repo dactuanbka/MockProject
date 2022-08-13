@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:layout_marginTop="70dp"
-    android:background="@color/black"
+    app:titleTextColor="@color/white"
+    android:background="@color/background_mock"
     android:elevation="0dp"
     app:navigationIcon="@drawable/ic_burger_menu">
 

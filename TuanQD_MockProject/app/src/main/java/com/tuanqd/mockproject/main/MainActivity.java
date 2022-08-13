@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOADER_DEVICE_ID = 1;
     BaseViewModel baseViewModel;
     ArtistViewModel artistViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         baseViewModel = new ViewModelProvider(this).get(BaseViewModel.class);
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -83,10 +85,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, mNavController);
     }
+
     private void setBottomNavigation() {
         BottomNavigationView bottomNavigationView = activityMainBinding.navBottomView;
         NavigationUI.setupWithNavController(bottomNavigationView, mNavController);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

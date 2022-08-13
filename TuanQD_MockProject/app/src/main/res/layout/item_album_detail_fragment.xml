@@ -4,22 +4,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="TopSongsModel"
-            type="com.tuanqd.mockproject.songs.artist.artistdetails.TopSongsModel" />
+            name="AlbumDetailModel"
+            type="com.tuanqd.mockproject.songs.albums.albumdetail.AlbumDetailModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
         android:background="@drawable/stroke_popup_menu_solid">
 
         <ImageView
-            android:id="@+id/img_play_top_song"
+            android:id="@+id/ic_play_song_artist_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:imageResource="@{TopSongsModel.imgTopSongResource}"
+            app:imageResource="@{AlbumDetailModel.iconPlayAlBumRes}"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,10 +32,10 @@
             android:layout_marginStart="20dp"
             android:hint="songs"
             android:textColorHint="@color/white"
-            android:text="@{TopSongsModel.titleSong}"
+            android:text="@{AlbumDetailModel.titleSongOfAlbum}"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/img_play_top_song"
-            app:layout_constraintStart_toEndOf="@+id/img_play_top_song"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_play_song_artist_detail"
+            app:layout_constraintStart_toEndOf="@+id/ic_play_song_artist_detail"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -45,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:hint="duration"
-           android:gravity="center"
-            android:text="@{TopSongsModel.duration}"
+            android:gravity="center"
+            android:text="@{AlbumDetailModel.duration}"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="10sp"
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:imageResource="@{TopSongsModel.imgMenuTopSongRes}"
+            app:imageResource="@{AlbumDetailModel.imgPlayAlbumDetailRes}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.342"

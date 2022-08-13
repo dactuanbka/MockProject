@@ -1,0 +1,27 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_mock"
+    android:orientation="vertical"
+    android:paddingEnd="20dp"
+    android:paddingTop="40dp"
+    android:paddingStart="20dp"
+    tools:context="com.tuanqd.mockproject.songs.albums.albumdetail.AlbumDetailFragment">
+    <ImageView
+        android:id="@+id/imgCover_AlbumDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_album_details_cover" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_album_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
+</layout>

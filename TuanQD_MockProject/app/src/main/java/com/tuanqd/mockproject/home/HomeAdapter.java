@@ -30,6 +30,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         this.homeModelList = homeModelList;
         this.context = context;
     }
+
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +39,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 inflater, R.layout.recyclerview_fragment_home, parent, false);
         return new HomeViewHolder(homeBinding);
     }
+
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeModel homeModel = homeModelList.get(position);
@@ -52,6 +54,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.homeBinding.setHomeModel(homeModel);
         holder.homeBinding.executePendingBindings();
     }
+
     @Override
     public int getItemViewType(int position) {
         if (homeModelList.get(position).getViewType() == 0) {

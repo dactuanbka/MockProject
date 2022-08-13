@@ -44,10 +44,10 @@ public class ArtistDetailViewModel extends ViewModel {
         if(topAlbumsModelList!=null){
             topAlbumsModelList.clear();
         }
-        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.anh_dep_home, "Fire Dragon", "2019"));
-        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.anh_dep_home, "Sound of Life", "2018"));
-        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.anh_dep_home, "Giving Heart", "2017"));
-        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.anh_dep_home, "Dream", "2016"));
+        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.album_zing, "Fire Dragon", "2019"));
+        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.album_zing2jpg, "Sound of Life", "2018"));
+        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.album_zing, "Giving Heart", "2017"));
+        topAlbumsModelList.add(new TopAlbumsModel(R.drawable.album_zing3, "Dream", "2016"));
         return new TopAlbumsAdapter(topAlbumsModelList);
     }
 

@@ -25,21 +25,23 @@ import com.tuanqd.mockproject.main.SongsModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllSongsViewModel extends AndroidViewModel{
+public class AllSongsViewModel extends AndroidViewModel {
 
-    private List<SongsModel>songsModelList= new ArrayList<>();
-    AllSongsListRepository allSongsListRepository= AllSongsListRepository.getInstance();
+    private List<SongsModel> songsModelList = new ArrayList<>();
+    AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
 
     public AllSongsViewModel(@NonNull Application application) {
         super(application);
     }
+
     // set image for songs
     @BindingAdapter("bind:imageBitmap")
     public static void loadImage(ImageView img, Bitmap bitmap) {
         img.setImageBitmap(bitmap);
     }
-    public List<SongsModel> getListData(){
-        songsModelList=allSongsListRepository.getAllSongsList();
+
+    public List<SongsModel> getListData() {
+        songsModelList = allSongsListRepository.getAllSongsList();
         return songsModelList;
     }
 }

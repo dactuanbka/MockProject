@@ -37,7 +37,7 @@ public class RecentlyPlayedHomeAdapter extends RecyclerView.Adapter<RecentlyPlay
 
     @Override
     public int getItemCount() {
-        if (recentlyPlayedHomeModelList!=null) {
+        if (recentlyPlayedHomeModelList != null) {
             return recentlyPlayedHomeModelList.size();
         } else {
             return 0;
@@ -49,7 +49,7 @@ public class RecentlyPlayedHomeAdapter extends RecyclerView.Adapter<RecentlyPlay
 
         public RecentlyPlayedViewHolder(@NonNull ItemRecentlyPlayedHomeBinding itemRecentlyPlayedHomeBinding) {
             super(itemRecentlyPlayedHomeBinding.getRoot());
-            this.itemRecentlyPlayedHomeBinding= itemRecentlyPlayedHomeBinding;
+            this.itemRecentlyPlayedHomeBinding = itemRecentlyPlayedHomeBinding;
         }
     }
 }
