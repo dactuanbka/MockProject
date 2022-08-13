@@ -31,6 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:hint="songs"
+            android:textColorHint="@color/white"
             android:text="@{TopSongsModel.titleSong}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/img_play_top_song"
@@ -41,15 +43,19 @@
         <TextView
             android:id="@+id/duration_top_song"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:hint="duration"
+           android:gravity="center"
             android:text="@{TopSongsModel.duration}"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/title_top_song"
             app:layout_constraintEnd_toStartOf="@+id/img_menu_top_song"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/title_top_song"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.805"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title_top_song"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/img_menu_top_song"

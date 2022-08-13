@@ -64,17 +64,14 @@ public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongIn
         allSongsViewModel = new ViewModelProvider(requireActivity()).get(AllSongsViewModel.class);
         mRcvAllSongs = fragmentAllSongsBinding.recyclerViewAllSongs;
         mRcvAllSongs.setLayoutManager((new LinearLayoutManager(requireContext())));
-        // make divider_color:
-//        setDividerColor();
-        if(allSongsListRepository.getAllSongsList()!=null) {
-            songsModelList = allSongsListRepository.getAllSongsList();
+
+        if (allSongsListRepository.getAllSongsList() != null) {
             mRcvAllSongs.setAdapter(new AllSongsAdapter(this,
-                    songsModelList));
-        }else{
+                    allSongsViewModel.getListData()));
+        } else {
             Log.i("TAG", "there is no repository");
         }
         registerBroadcast();
-
         return fragmentAllSongsBinding.getRoot();
     }
 
@@ -82,7 +79,7 @@ public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongIn
     public void onResume() {
         // trả về cusor với các trường đã được trỏ tới.
         mRcvAllSongs.setAdapter(new AllSongsAdapter(this,
-                songsModelList));
+                allSongsViewModel.getListData()));
         super.onResume();
     }
 

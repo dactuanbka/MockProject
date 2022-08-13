@@ -12,4 +12,5 @@
   <color name="divider_color">#E01515</color>
   <color name="background_mock">#181b2c</color>
   <color name="text_fade">#727273</color>
+  <color name="background_menu">#383b4a</color>
 </resources>

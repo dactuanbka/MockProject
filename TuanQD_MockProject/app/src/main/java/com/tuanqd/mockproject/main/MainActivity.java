@@ -30,6 +30,7 @@ import com.example.baseproject.R;
 import com.example.baseproject.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.tuanqd.mockproject.songs.artist.ArtistViewModel;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     NavController mNavController;
     private static final int LOADER_DEVICE_ID = 1;
     BaseViewModel baseViewModel;
+    ArtistViewModel artistViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                 LoaderManager.getInstance(this).initLoader(LOADER_DEVICE_ID, null, baseViewModel);
+
+
             } else {
                 Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
             }

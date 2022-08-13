@@ -97,11 +97,11 @@ public class MusicService extends Service {
 
         if (mIsPlaying) {
             remoteView.setOnClickPendingIntent(R.id.play_pause_notification_button, getPendingIntent(PAUSE));
-            remoteView.setImageViewResource(R.id.play_pause_notification_button, R.drawable.ic_pause_music_24);
+            remoteView.setImageViewResource(R.id.play_pause_notification_button, R.drawable.ic_pause_notification);
         } else {
 
             remoteView.setOnClickPendingIntent(R.id.play_pause_notification_button, getPendingIntent(PLAY));
-            remoteView.setImageViewResource(R.id.play_pause_notification_button, R.drawable.ic_play_music);
+            remoteView.setImageViewResource(R.id.play_pause_notification_button, R.drawable.ic_play_notification);
         }
 
         android.app.Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)

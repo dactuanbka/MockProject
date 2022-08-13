@@ -7,12 +7,11 @@ import com.tuanqd.mockproject.main.SongsModel;
 public class PlaylistSongsModel extends SongsModel {
     private String namePlaylist;
 
-    public PlaylistSongsModel(String ID, Bitmap bitmapSong, String title, String artist, String albumId,
+    public PlaylistSongsModel(String ID, Bitmap bitmapSong, String title, String artist,int artistId, String albumId,
                               String album, String duration, String musicPath,String namePlaylist) {
-        super(ID, bitmapSong, title, artist, albumId, album, duration, musicPath);
+        super(ID, bitmapSong, title, artist, artistId, albumId, album, duration, musicPath);
         this.namePlaylist= namePlaylist;
     }
-
 
     public String getNamePlaylist() {
         return namePlaylist;

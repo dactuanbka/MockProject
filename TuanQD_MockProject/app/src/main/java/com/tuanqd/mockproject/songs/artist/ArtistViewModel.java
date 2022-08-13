@@ -1,22 +1,85 @@
 package com.tuanqd.mockproject.songs.artist;
 
+import android.app.Application;
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
-public class ArtistViewModel {
-    private Cursor mData;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
+import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArtistViewModel extends AndroidViewModel implements LoaderManager.LoaderCallbacks<Cursor> {
+    private List<ArtistModel> artistModeTemplList = new ArrayList<>();
+    Cursor artistCursor;
+    Bitmap bitmapArtist;
+    Context mContext;
+    int position = 0;
+    private MutableLiveData<Boolean> finishLoader= new MutableLiveData<>();
+    public LiveData<Boolean> getFinishLoader(){
+        return finishLoader;
+    }
+
+    public ArtistViewModel(@NonNull Application application) {
+        super(application);
+        mContext = application.getApplicationContext();
+    }
+
+    public Cursor getArtistCursor() {
+        return artistCursor;
+    }
+
+    public void setArtistCursor(Cursor artistCursor) {
+        this.artistCursor = artistCursor;
+    }
+
     @BindingAdapter("bind:imageBitmap")
     public static void loadImageArtist(ImageView img, Bitmap bitmap) {
         img.setImageBitmap(bitmap);
     }
 
-    public void setCursorDataArtist(Cursor mData) {
-        this.mData = mData;
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        Loader<Cursor> loader;
+        String[] projection = {
+                MediaStore.Audio.Artists._ID,
+                MediaStore.Audio.Artists.ARTIST,     // name artist
+                MediaStore.Audio.Artists.NUMBER_OF_ALBUMS,
+                MediaStore.Audio.Artists.NUMBER_OF_TRACKS
+        };
+        loader = new CursorLoader(mContext,
+                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null, null);
+        return loader;
+    }
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        setArtistCursor(data);
+        finishLoader.setValue(true);
+
     }
 
-    public Cursor getCursorDataArtist() {
-        return mData;
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        setArtistCursor(null);
     }
+
 }

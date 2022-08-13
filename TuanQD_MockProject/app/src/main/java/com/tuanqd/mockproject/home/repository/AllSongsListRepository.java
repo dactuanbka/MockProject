@@ -20,7 +20,6 @@ public class AllSongsListRepository {
     public List<SongsModel> getAllSongsList() {
         return mAllSongsList;
     }
-
     public void setAllSongsList(List<SongsModel> mAllSongsList) {
         this.mAllSongsList = mAllSongsList;
     }

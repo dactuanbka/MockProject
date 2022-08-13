@@ -1,6 +1,7 @@
 package com.tuanqd.mockproject.songs.artist.artistdetails;
 
 import static com.tuanqd.mockproject.songs.artist.artistdetails.ArtistDetailsModel.TOP_ALBUMS;
+import static com.tuanqd.mockproject.songs.artist.artistdetails.ArtistDetailsModel.TOP_SONGS;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,8 +52,11 @@ public class ArtistDetailsAdapter extends RecyclerView.Adapter<ArtistDetailsAdap
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-
+        if (artistDetailsModelList.get(position).getViewType() == 0) {
+            return TOP_ALBUMS;
+        } else {
+            return TOP_SONGS;
+        }
     }
 
     @Override

@@ -7,21 +7,31 @@ public class SongsModel {
     private Bitmap bitmapSong;
     private String title;
     private String artist;
+    private int artistId;
     private String albumId;
     private String album;
     private String duration;
     private String musicPath;
 
-    public SongsModel(String ID, Bitmap bitmapSong, String title, String artist, String albumId,
-                      String album, String duration, String musicPath) {
+    public SongsModel(String ID, Bitmap bitmapSong, String title, String artist, int artistId,
+                      String albumId, String album, String duration, String musicPath) {
         this.ID = ID;
         this.bitmapSong = bitmapSong;
         this.title = title;
         this.artist = artist;
+        this.artistId = artistId;
         this.albumId = albumId;
         this.album = album;
         this.duration = duration;
         this.musicPath = musicPath;
+    }
+
+    public int getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(int artistId) {
+        this.artistId = artistId;
     }
 
     public String getAlbumId() {

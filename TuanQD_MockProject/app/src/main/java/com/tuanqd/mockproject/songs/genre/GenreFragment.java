@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,8 @@ import com.example.baseproject.databinding.FragmentGenreBinding;
 import com.tuanqd.mockproject.songs.allsongs.AllSongsViewModel;
 
 public class GenreFragment extends Fragment {
-
+    FragmentGenreBinding fragmentGenreBinding;
+    GenresViewModel genresViewModel;
 
     public GenreFragment() {
         // Required empty public constructor
@@ -29,6 +31,7 @@ public class GenreFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +43,34 @@ public class GenreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FragmentGenreBinding fragmentGenreBinding = FragmentGenreBinding.inflate(inflater);
-        GenresViewModel genresViewModel = new ViewModelProvider(requireActivity()).get(GenresViewModel.class);
+        fragmentGenreBinding = FragmentGenreBinding.inflate(inflater);
+        genresViewModel = new ViewModelProvider(requireActivity()).get(GenresViewModel.class);
         genresViewModel.initViewModel();
         fragmentGenreBinding.recyclerViewGenres.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         GenresAdapter genresAdapter = new GenresAdapter(genresViewModel.getGenresModelList());
         fragmentGenreBinding.recyclerViewGenres.setAdapter(genresAdapter);
         return fragmentGenreBinding.getRoot();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+     Log.i("onPause", "");
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("onResume", "");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("onStop", "");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("onDestroy", "");
     }
 }

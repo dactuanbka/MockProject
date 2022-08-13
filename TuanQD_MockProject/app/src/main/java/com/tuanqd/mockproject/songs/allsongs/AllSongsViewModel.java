@@ -19,61 +19,27 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
-public class AllSongsViewModel extends AndroidViewModel implements LoaderManager.LoaderCallbacks<Cursor> {
-    Context mContext;
-    private Cursor mData;
+import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+import com.tuanqd.mockproject.main.SongsModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AllSongsViewModel extends AndroidViewModel{
+
+    private List<SongsModel>songsModelList= new ArrayList<>();
+    AllSongsListRepository allSongsListRepository= AllSongsListRepository.getInstance();
 
     public AllSongsViewModel(@NonNull Application application) {
         super(application);
-        mContext = application.getApplicationContext();
     }
-
     // set image for songs
     @BindingAdapter("bind:imageBitmap")
     public static void loadImage(ImageView img, Bitmap bitmap) {
         img.setImageBitmap(bitmap);
     }
-
-    public void setCursorData(Cursor mData) {
-        this.mData = mData;
-    }
-
-    public Cursor getCursorData() {
-        return mData;
-    }
-
-    @NonNull
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        Loader<Cursor> loader;
-        String[] projection = {
-                MediaStore.Audio.Media._ID,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ALBUM_ID,
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.DURATION
-        };
-        loader = new CursorLoader(mContext,
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                projection,
-                MediaStore.Audio.Media.IS_MUSIC + "!=0",
-                null, null);
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        if (data != null) {
-            // listen data
-            setCursorData(data);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        // listen cursor
-        setCursorData(null);
+    public List<SongsModel> getListData(){
+        songsModelList=allSongsListRepository.getAllSongsList();
+        return songsModelList;
     }
 }

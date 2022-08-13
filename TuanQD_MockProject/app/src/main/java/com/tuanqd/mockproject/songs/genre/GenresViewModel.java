@@ -18,6 +18,9 @@ public class GenresViewModel extends ViewModel {
         this.genresModelList = genresModelList;
     }
     public void initViewModel() {
+        if(genresModelList!=null){
+            genresModelList.clear();
+        }
         genresModelList.add(new GenresModel(R.drawable.ic_classical_genre));
         genresModelList.add(new GenresModel(R.drawable.ic_genres_pop));
         genresModelList.add(new GenresModel(R.drawable.ic_genres_hiphop));

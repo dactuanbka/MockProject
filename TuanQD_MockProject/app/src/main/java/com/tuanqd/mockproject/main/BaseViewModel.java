@@ -16,7 +16,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
+
 import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.ARTIST_ID,
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.ALBUM_ID,
                 MediaStore.Audio.Media.ALBUM,
@@ -67,13 +70,13 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         // setCursor data
         setCursorData(data);
-        Thread test = new Thread(new Runnable() {
+        Thread setAllSongThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                setRepository();
+                setRepositoryData();
             }
         });
-        test.start();
+        setAllSongThread.start();
     }
 
     @Override
@@ -83,12 +86,11 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
     }
 
     // make repository
-    public void setRepository() {
+    public void setRepositoryData() {
         if (mCursor != null && mCursor.moveToPosition(position)) {
             String img = mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
             MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
             BitmapFactory.Options bfo = new BitmapFactory.Options();
-            Log.i("TAG", "" + img);
             metadataRetriever.setDataSource(img);
             byte[] rawBitmap = metadataRetriever.getEmbeddedPicture();
             if (rawBitmap != null) {
@@ -96,24 +98,26 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
             } else {
                 bitmapSong = null;
             }
-            // lấy ra String dữ liệu
+            // getData
+
             SongsModel allSongsModel = new SongsModel(
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
                     bitmapSong,
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)),
+                    mCursor.getInt(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST_ID)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)));
-            // make singleTone list all_songs.
+            Log.i("BASEVIEWMODEL_ARTISTID",""+mCursor.getInt(mCursor.getColumnIndexOrThrow(
+                    MediaStore.Audio.Media.ARTIST_ID)));
+            // get temporary list all_songs.
             allSongsModelList.add(allSongsModel);
-            allSongsListRepository.setAllSongsList(allSongsModelList);
-            Log.i("NAME ALBUMS", ""+ mCursor.getString(mCursor.
-                    getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))+" ID: \n"+mCursor.getString(mCursor.
-                    getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)));
             position = position + 1;
-            setRepository();
+            setRepositoryData();
         }
+        allSongsListRepository.setAllSongsList(allSongsModelList);
     }
+
 }

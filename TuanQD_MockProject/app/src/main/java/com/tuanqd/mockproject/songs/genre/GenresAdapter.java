@@ -19,6 +19,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
     public GenresAdapter(List<GenresModel> genresModelList) {
         this.genresModelList = genresModelList;
     }
+
     @NonNull
     @Override
     public GenresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +34,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
         holder.genresBinding.setGenresModel(genresModelList.get(position));
         holder.genresBinding.executePendingBindings();
     }
+
     @Override
     public int getItemCount() {
         if (genresModelList != null) {
@@ -43,7 +45,8 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
     }
 
     public class GenresViewHolder extends RecyclerView.ViewHolder {
-        ItemGenresBinding genresBinding;
+        private ItemGenresBinding genresBinding;
+
         public GenresViewHolder(@NonNull ItemGenresBinding genresBinding) {
             super(genresBinding.getRoot());
             this.genresBinding = genresBinding;

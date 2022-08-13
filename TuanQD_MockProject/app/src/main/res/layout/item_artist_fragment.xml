@@ -38,9 +38,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:background="@drawable/stroke_popup_menu">
 
                 <TextView
@@ -55,18 +54,21 @@
                     android:text="@{ArtistModel.titleArtist}"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/txtNumberAlbums_Artist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="numberAlbums"
-                    android:text="@{ArtistModel.numberAlbums}"
-                    android:textColor="@color/white"
+                    android:hint="1"
+
+                    android:text="@{String.valueOf(ArtistModel.numberAlbums)}"
+                    android:textColor="@color/text_fade"
                     android:textColorHint="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/txtArtist_Artist"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -78,9 +80,11 @@
                     android:id="@+id/txtNumberSongs_Artist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{ArtistModel.numberAlbums}"
-                    android:hint="numberSongs"
+                    android:hint="1"
+                    android:textColor="@color/text_fade"
+                    android:text="@{String.valueOf(ArtistModel.numberSongs)}"
                     android:textColorHint="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txtNumberAlbums_Artist"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.50"
@@ -96,6 +100,32 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0"
                     app:srcCompat="@drawable/ic_menu_popup_artist" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Albums"
+                    android:textColor="@color/text_fade"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtNumberAlbums_Artist"
+                    app:layout_constraintStart_toEndOf="@+id/txtNumberAlbums_Artist"
+                    app:layout_constraintTop_toTopOf="@+id/txtNumberAlbums_Artist"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/text_fade"
+                    android:text="Songs"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtNumberSongs_Artist"
+                    app:layout_constraintStart_toEndOf="@+id/txtNumberSongs_Artist"
+                    app:layout_constraintTop_toTopOf="@+id/txtNumberSongs_Artist"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

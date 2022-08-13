@@ -5,14 +5,16 @@ import android.graphics.Bitmap;
 public class ArtistModel {
 private Bitmap imageArtist;
 private String titleArtist;
-private String numberAlbums;
-private String numberSongs;
+private int numberAlbums;
+private int numberSongs;
 
-    public ArtistModel(Bitmap imageArtist, String titleArtist, String numberAlbums, String numberSongs) {
+    public ArtistModel(Bitmap imageArtist, String titleArtist, int numberAlbums, int numberSongs) {
         this.imageArtist = imageArtist;
         this.titleArtist = titleArtist;
         this.numberAlbums = numberAlbums;
         this.numberSongs = numberSongs;
+    }
+    public ArtistModel() {
     }
 
     public Bitmap getImageArtist() {
@@ -31,19 +33,19 @@ private String numberSongs;
         this.titleArtist = titleArtist;
     }
 
-    public String getNumberAlbums() {
+    public int getNumberAlbums() {
         return numberAlbums;
     }
 
-    public void setNumberAlbums(String numberAlbums) {
+    public void setNumberAlbums(int numberAlbums) {
         this.numberAlbums = numberAlbums;
     }
 
-    public String getNumberSongs() {
+    public int getNumberSongs() {
         return numberSongs;
     }
 
-    public void setNumberSongs(String numberSongs) {
+    public void setNumberSongs(int numberSongs) {
         this.numberSongs = numberSongs;
     }
 }
