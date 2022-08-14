@@ -56,7 +56,6 @@ public class MusicService extends Service {
     int length = 0;
     private int currentProgress = 0;
 
-
     // Binder to activity
     LocalBinder binder = new LocalBinder() {
     };
@@ -134,6 +133,13 @@ public class MusicService extends Service {
 
         }
         return START_STICKY;
+    }
+    public int getProgress() {
+        if (mediaPlayer.isPlaying()) {
+            return mediaPlayer.getCurrentPosition();
+        } else {
+            return 0;
+        }
     }
 
 
@@ -245,6 +251,8 @@ public class MusicService extends Service {
 
             Log.i("size list", "" + allSongsListRepository.getAllSongsList().size());
             Log.i("position", "" + positionInAllSongs);
+        }else{
+            positionInAllSongs=0;
         }
         playMusic();
 
@@ -255,8 +263,10 @@ public class MusicService extends Service {
         if (positionInAllSongs > 0) {
             positionInAllSongs = positionInAllSongs - 1;
         }
-
-        playMusic();
+        if(positionInAllSongs==0){
+            positionInAllSongs=allSongsListRepository.getAllSongsList().size()-1;
+        }
+            playMusic();
     }
 
     private void pauseMusic() {

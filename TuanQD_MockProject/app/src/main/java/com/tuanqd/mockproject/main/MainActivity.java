@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private HandlerThread mHandlerThread;
     private Handler mHandler;
     int currentProgress = 0;
+    boolean test = true;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             musicService = binder.getService();
             Toast.makeText(MainActivity.this, "ServiceConnected", Toast.LENGTH_SHORT).show();
             mBound = true;
+
         }
 
         @Override
@@ -104,9 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setBottomNavigation();
         setAppBar();
 
-        // bind service
-        Intent intent = new Intent(this, MusicService.class);
-        bindService(intent, connection, BIND_AUTO_CREATE);
+
         // register for Broadcast receiver
 
         registerBroadcast();
@@ -144,33 +144,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        // bind service
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+
         // update progress for seekbar
-        if (musicService != null) {
-            mHandlerThread = new HandlerThread("Server Handler Thread");
-            mHandlerThread.start();
-            mHandler = new Handler(mHandlerThread.getLooper());
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    while (musicService.mediaPlayer != null) {
-                        currentProgress = musicService.mediaPlayer.getCurrentPosition();
-//                Log.i("Progress in Service"," "+currentProgress);
-                    }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activityMainBinding.appBarMain.seekBarMainNotification.
-                                    setProgress(currentProgress);
-                        }
-                    });
+        mHandlerThread = new HandlerThread("Server Handler Thread");
+        mHandlerThread.start();
+        mHandler = new Handler(mHandlerThread.getLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            });
-        }
+                if (musicService != null) {
+                    do {
+                        currentProgress = musicService.getProgress();
+                        Log.i("Progress in Service", " " + currentProgress);
+                    } while (test);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activityMainBinding.appBarMain.seekBarMainNotification.
+                                setProgress(currentProgress);
+                        Log.i("current Progress", "" + currentProgress);
+                    }
+                });
+            }
+        });
+
 
         // handle seekBar of main notification
         activityMainBinding.appBarMain.seekBarMainNotification.setOnSeekBarChangeListener(
@@ -250,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final BroadcastReceiver musicBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
 // handle action with all song fragment
             // get playing from service.
             isPlaying = intent.getBooleanExtra(IS_PLAYING_FROM_SERVICE, false);
@@ -276,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case (R.id.img_play_main_notification):
                 // play media
                 if (!isPlaying) {
-                    Log.i("vào play", "" + false);
+                    Log.i(" play", "" + false);
                     isPlaying = true;
                     activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(R.drawable.ic_pause_main_notification);
                     intentMainNotificationSend.putExtra(START_FROM_MAIN_NOTIFICATION, 1);
