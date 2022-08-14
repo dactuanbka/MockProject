@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tuanqd.mockproject.main.MainActivity">
@@ -27,6 +28,74 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_gravity="bottom"
+        android:id="@+id/constraintLayoutMainNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBar_main_notification"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="@color/icon_mock"
+            android:secondaryProgress="0"
+            android:secondaryProgressTint="@color/divider_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgSong_main_notification"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/thumbai_zing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_main_notification" />
+
+        <ImageView
+            android:id="@+id/img_prev_main_notification"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_previous"
+            app:layout_constraintBottom_toBottomOf="@+id/imgSong_main_notification"
+            app:layout_constraintEnd_toStartOf="@+id/img_play_main_notification"
+            app:layout_constraintTop_toTopOf="@+id/imgSong_main_notification"
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/img_play_main_notification"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_play_main_notification"
+            app:layout_constraintBottom_toBottomOf="@+id/img_prev_main_notification"
+            app:layout_constraintEnd_toStartOf="@+id/img_next_main_notification"
+            app:layout_constraintTop_toTopOf="@+id/img_prev_main_notification"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/img_next_main_notification"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="@+id/img_play_main_notification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_play_main_notification"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+</layout>

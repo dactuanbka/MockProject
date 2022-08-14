@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bindArtist="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="ArtistModel"
             type="com.tuanqd.mockproject.songs.artist.ArtistModel" />
     </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +31,12 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/anh_dep_home"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bindArtist:imageBitmap="@{ArtistModel.imageArtist}"
-                android:src="@drawable/anh_dep_home"/>
+                bindArtist:imageBitmap="@{ArtistModel.imageArtistBitmap}" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -80,8 +83,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="1"
-                    android:textColor="@color/text_fade"
                     android:text="@{String.valueOf(ArtistModel.numberSongs)}"
+                    android:textColor="@color/text_fade"
                     android:textColorHint="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txtNumberAlbums_Artist"
@@ -118,8 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/text_fade"
                     android:text="Songs"
+                    android:textColor="@color/text_fade"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txtNumberSongs_Artist"
                     app:layout_constraintStart_toEndOf="@+id/txtNumberSongs_Artist"

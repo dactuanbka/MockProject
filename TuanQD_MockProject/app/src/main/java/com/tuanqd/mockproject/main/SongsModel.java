@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 public class SongsModel {
     private String ID;
-    private Bitmap bitmapSong;
+    private Bitmap SongBitmap;
     private String title;
     private String artist;
     private int artistId;
@@ -13,10 +13,10 @@ public class SongsModel {
     private String duration;
     private String musicPath;
 
-    public SongsModel(String ID, Bitmap bitmapSong, String title, String artist, int artistId,
+    public SongsModel(String ID, Bitmap SongBitmap, String title, String artist, int artistId,
                       String albumId, String album, String duration, String musicPath) {
         this.ID = ID;
-        this.bitmapSong = bitmapSong;
+        this.SongBitmap = SongBitmap;
         this.title = title;
         this.artist = artist;
         this.artistId = artistId;
@@ -58,12 +58,12 @@ public class SongsModel {
         this.musicPath = musicPath;
     }
 
-    public Bitmap getBitmapSong() {
-        return bitmapSong;
+    public Bitmap getSongBitmap() {
+        return SongBitmap;
     }
 
-    public void setBitmapSong(Bitmap bitmapSong) {
-        this.bitmapSong = bitmapSong;
+    public void setSongBitmap(Bitmap songBitmap) {
+        this.SongBitmap = songBitmap;
     }
 
     public String getID() {

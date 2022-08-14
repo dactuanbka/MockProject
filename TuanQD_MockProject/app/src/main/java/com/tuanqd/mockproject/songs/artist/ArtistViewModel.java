@@ -18,6 +18,9 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import com.bumptech.glide.Glide;
+import com.example.baseproject.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +51,6 @@ public class ArtistViewModel extends AndroidViewModel implements LoaderManager.L
     public static void loadImageArtist(ImageView img, Bitmap bitmap) {
         img.setImageBitmap(bitmap);
     }
-
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {

@@ -1,31 +1,51 @@
 package com.tuanqd.mockproject.main;
 
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.ACTION_FROM_SERVICE;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.POSITION_SONG_FROM_SERVICE;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.IS_PLAYING_FROM_MAIN_NOTIFICATION;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.IS_PLAYING_FROM_SERVICE;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.LOADER_DEVICE_ID;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.START_FROM_MAIN_NOTIFICATION;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.NEXT_FROM_MAIN_NOTIFICATION;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.PLAY_FROM_ALL_SONG_AT_MAIN;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.POSITION_FROM_ALL_SONG;
+import static com.tuanqd.mockproject.mediaplayer.Notification_Application.PREVIOUS_FROM_MAIN_NOTIFICATION;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.app.LoaderManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 
@@ -33,21 +53,47 @@ import com.example.baseproject.R;
 import com.example.baseproject.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
 import com.tuanqd.mockproject.mediaplayer.MusicService;
 import com.tuanqd.mockproject.songs.allsongs.AllSongsViewModel;
-import com.tuanqd.mockproject.songs.artist.ArtistViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityMainBinding activityMainBinding;
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
-    private static final int LOADER_DEVICE_ID = 1;
     BaseViewModel baseViewModel;
     AllSongsViewModel allSongsViewModel;
-    Intent intentAllSongs;
+    Intent intentReceiveFromAllSongs;
+    AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
+    List<SongsModel> songsModelList = new ArrayList<>();
+    Intent intentMainNotificationSend;
+    boolean isPlaying = false, next = false, previous = false;
+    int positionSongs = 0;
+    MusicService musicService;
+    boolean mBound = false;
+    private HandlerThread mHandlerThread;
+    private Handler mHandler;
+    int currentProgress = 0;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MusicService.LocalBinder binder = (MusicService.LocalBinder) service;
+            musicService = binder.getService();
+            Toast.makeText(MainActivity.this, "ServiceConnected", Toast.LENGTH_SHORT).show();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBound = false;
+            Toast.makeText(MainActivity.this, "ServiceDisConnected", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,24 +103,96 @@ public class MainActivity extends AppCompatActivity {
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         setBottomNavigation();
         setAppBar();
+
+        // bind service
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+        // register for Broadcast receiver
+
+        registerBroadcast();
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         baseViewModel = new ViewModelProvider(this).get(BaseViewModel.class);
-        allSongsViewModel = new ViewModelProvider(this).get(AllSongsViewModel.class);
-        // all intent run service
+        intentMainNotificationSend = new Intent(this, MusicService.class);
 
-        // observer all song fragment send action.
-        allSongsViewModel.getPositionAllSong().observe(this, new Observer<Integer>() {
+        allSongsViewModel = new ViewModelProvider(this).get(AllSongsViewModel.class);
+        activityMainBinding.appBarMain.constraintLayoutMainNotification.setAlpha((float) 0.9);
+        // main notification do action
+        activityMainBinding.appBarMain.imgPlayMainNotification.setOnClickListener(this);
+        activityMainBinding.appBarMain.imgPrevMainNotification.setOnClickListener(this);
+        activityMainBinding.appBarMain.imgNextMainNotification.setOnClickListener(this);
+        baseViewModel.getFinishLoaderAllSongs().observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(Integer integer) {
-                intentAllSongs = new Intent(MainActivity.this, MusicService.class);
-                intentAllSongs.putExtra("AllSongsStart", 1);
-                intentAllSongs.putExtra("positionAllSong", integer);
-                startService(intentAllSongs);
+            public void onChanged(Boolean aBoolean) {
+
+                // all intent run service
+                // observer all song fragment send action.
+                songsModelList = allSongsListRepository.getAllSongsList();
+                allSongsViewModel.getPositionAllSong().observe(MainActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        intentReceiveFromAllSongs = new Intent(MainActivity.this, MusicService.class);
+                        intentReceiveFromAllSongs.putExtra(PLAY_FROM_ALL_SONG_AT_MAIN, 1);
+                        intentReceiveFromAllSongs.putExtra(POSITION_FROM_ALL_SONG, integer);
+                        activityMainBinding.appBarMain.imgSongMainNotification.setImageBitmap(
+                                songsModelList.get(integer).getSongBitmap());
+                        activityMainBinding.appBarMain.imgPlayMainNotification.
+                                setImageResource(R.drawable.ic_pause_main_notification);
+                        startService(intentReceiveFromAllSongs);
+                    }
+                });
             }
         });
+
+        // update progress for seekbar
+        if (musicService != null) {
+            mHandlerThread = new HandlerThread("Server Handler Thread");
+            mHandlerThread.start();
+            mHandler = new Handler(mHandlerThread.getLooper());
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    while (musicService.mediaPlayer != null) {
+                        currentProgress = musicService.mediaPlayer.getCurrentPosition();
+//                Log.i("Progress in Service"," "+currentProgress);
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            activityMainBinding.appBarMain.seekBarMainNotification.
+                                    setProgress(currentProgress);
+                        }
+                    });
+                }
+            });
+        }
+
+        // handle seekBar of main notification
+        activityMainBinding.appBarMain.seekBarMainNotification.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
     }
 
+    // result permission for access media
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -83,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                 LoaderManager.getInstance(this).initLoader(LOADER_DEVICE_ID, null, baseViewModel);
-
-
             } else {
                 Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
             }
@@ -123,13 +239,93 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    // handle broadcast receiver
+    private void registerBroadcast() {
+        IntentFilter filter = new IntentFilter(ACTION_FROM_SERVICE);
+        LocalBroadcastManager.getInstance(this).registerReceiver(musicBroadcastReceiver, filter);
+        IntentFilter filter2 = new IntentFilter("remainTimer");
+        LocalBroadcastManager.getInstance(this).registerReceiver(musicBroadcastReceiver, filter2);
+    }
+
+    private final BroadcastReceiver musicBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+// handle action with all song fragment
+            // get playing from service.
+            isPlaying = intent.getBooleanExtra(IS_PLAYING_FROM_SERVICE, false);
+            if (isPlaying) {
+                activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(
+                        R.drawable.ic_pause_main_notification);
+            } else {
+                activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(
+                        R.drawable.ic_play_main_notification);
+            }
+            // set image thumbs for main notification
+            positionSongs = intent.getIntExtra(POSITION_SONG_FROM_SERVICE, 0);
+            activityMainBinding.appBarMain.imgSongMainNotification.setImageBitmap(
+                    songsModelList.get(positionSongs).getSongBitmap());
+        }
+
+// hanlde action with ...
+
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case (R.id.img_play_main_notification):
+                // play media
+                if (!isPlaying) {
+                    Log.i("vào play", "" + false);
+                    isPlaying = true;
+                    activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(R.drawable.ic_pause_main_notification);
+                    intentMainNotificationSend.putExtra(START_FROM_MAIN_NOTIFICATION, 1);
+                    intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, false);
+                    intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, false);
+                    intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, isPlaying);
+                    startService(intentMainNotificationSend);
+                }
+                //pause media
+                else {
+                    Log.i("vào pause", "" + true);
+                    activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(R.drawable.ic_play_main_notification);
+                    intentMainNotificationSend.putExtra(START_FROM_MAIN_NOTIFICATION, 1);
+                    intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, false);
+                    intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, false);
+                    intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, false);
+                    startService(intentMainNotificationSend);
+                }
+                break;
+            case (R.id.img_next_main_notification):
+                // next
+                activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(R.drawable.ic_pause_main_notification);
+                intentMainNotificationSend.putExtra(START_FROM_MAIN_NOTIFICATION, 1);
+                intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, false);
+                intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, true);
+                intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, false);
+                startService(intentMainNotificationSend);
+                break;
+            case (R.id.img_prev_main_notification):
+                //previous
+                activityMainBinding.appBarMain.imgPlayMainNotification.setImageResource(R.drawable.ic_pause_main_notification);
+                intentMainNotificationSend.putExtra(START_FROM_MAIN_NOTIFICATION, 1);
+                intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, true);
+                intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, false);
+                intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, false);
+                startService(intentMainNotificationSend);
+                break;
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (intentAllSongs != null) {
-            stopService(intentAllSongs);
-            intentAllSongs=null;
+        if (intentReceiveFromAllSongs != null) {
+            stopService(intentReceiveFromAllSongs);
+            intentReceiveFromAllSongs = null;
         }
-
+        unbindService(connection);
+        mBound = false;
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(musicBroadcastReceiver);
     }
 }

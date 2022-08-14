@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.tuanqd.mockproject.mediaplayer.Notification"
+        android:name="com.tuanqd.mockproject.mediaplayer.Notification_Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -40,5 +40,6 @@
         <service android:name="com.tuanqd.mockproject.mediaplayer.MusicService" />
         <receiver android:name="com.tuanqd.mockproject.mediaplayer.MusicBroadcastReceiver" />
     </application>
+
 
 </manifest>

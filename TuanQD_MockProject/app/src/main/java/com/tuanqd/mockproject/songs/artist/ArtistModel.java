@@ -3,13 +3,13 @@ package com.tuanqd.mockproject.songs.artist;
 import android.graphics.Bitmap;
 
 public class ArtistModel {
-private Bitmap imageArtist;
+private Bitmap imageArtistBitmap;
 private String titleArtist;
 private int numberAlbums;
 private int numberSongs;
 
-    public ArtistModel(Bitmap imageArtist, String titleArtist, int numberAlbums, int numberSongs) {
-        this.imageArtist = imageArtist;
+    public ArtistModel(Bitmap imageArtistBitmap, String titleArtist, int numberAlbums, int numberSongs) {
+        this.imageArtistBitmap = imageArtistBitmap;
         this.titleArtist = titleArtist;
         this.numberAlbums = numberAlbums;
         this.numberSongs = numberSongs;
@@ -17,12 +17,12 @@ private int numberSongs;
     public ArtistModel() {
     }
 
-    public Bitmap getImageArtist() {
-        return imageArtist;
+    public Bitmap getImageArtistBitmap() {
+        return imageArtistBitmap;
     }
 
-    public void setImageArtist(Bitmap imageArtist) {
-        this.imageArtist = imageArtist;
+    public void setImageArtistBitmap(Bitmap imageArtistBitmap) {
+        this.imageArtistBitmap = imageArtistBitmap;
     }
 
     public String getTitleArtist() {

@@ -29,7 +29,7 @@ import com.tuanqd.mockproject.mediaplayer.MusicService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllSongsFragment extends Fragment  {
+public class AllSongsFragment extends Fragment {
     private static final int LOADER_DEVICE_ID = 1;
     RecyclerView mRcvAllSongs;
     Intent intentAllSongs;
@@ -70,7 +70,7 @@ public class AllSongsFragment extends Fragment  {
         } else {
             Toast.makeText(requireContext(), "There is no music data ", Toast.LENGTH_SHORT).show();
         }
-        registerBroadcast();
+
         return fragmentAllSongsBinding.getRoot();
     }
 
@@ -81,27 +81,6 @@ public class AllSongsFragment extends Fragment  {
         super.onResume();
     }
 
-    private void registerBroadcast() {
-        IntentFilter filter = new IntentFilter("statusMediaPlayer");
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(musicBroadcastReceiver, filter);
-        IntentFilter filter2 = new IntentFilter("remainTimer");
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(musicBroadcastReceiver, filter2);
-    }
-
-    private final BroadcastReceiver musicBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // all song register for notification
-        }
-    };
-
-//    @Override
-//    public void songOnClick(int position) {
-//        intentAllSongs = new Intent(requireContext(), MusicService.class);
-//        intentAllSongs.putExtra("AllSongsStart", 1);
-//        intentAllSongs.putExtra("positionAllSong", position);
-//        requireContext().startService(intentAllSongs);
-//    }
 
     @Override
     public void onDestroy() {

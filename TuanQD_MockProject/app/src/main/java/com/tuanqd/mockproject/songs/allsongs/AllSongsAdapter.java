@@ -36,7 +36,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
 
     @Override
     public void onBindViewHolder(@NonNull AllSongsViewHolder holder, int position) {
-        holder.allSongBinding.setAllSongsModel(allSongsModelList.get(position));
+        holder.allSongBinding.setSongsModel(allSongsModelList.get(position));
         holder.allSongBinding.executePendingBindings();
     }
 

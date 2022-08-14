@@ -95,7 +95,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         for (int j = 0; j < allSongsListRepository.getAllSongsList().size(); j++) {
             String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.ARTIST));
             if (artist.equals(allSongsListRepository.getAllSongsList().get(j).getArtist())) {
-                artistBitmap = allSongsListRepository.getAllSongsList().get(j).getBitmapSong();
+                artistBitmap = allSongsListRepository.getAllSongsList().get(j).getSongBitmap();
             }
         }
         return artistBitmap;

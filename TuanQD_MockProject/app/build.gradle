@@ -37,7 +37,6 @@ android {
 
 dependencies {
 
-
 // circle image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 

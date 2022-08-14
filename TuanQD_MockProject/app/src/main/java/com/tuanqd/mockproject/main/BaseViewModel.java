@@ -9,14 +9,20 @@ import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import com.bumptech.glide.Glide;
+import com.example.baseproject.R;
 import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
 
 import java.util.ArrayList;
@@ -34,6 +40,13 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
         super(application);
         this.mContext = application.getApplicationContext();
     }
+
+    private MutableLiveData<Boolean> finishLoaderAllSongs = new MutableLiveData<>();
+
+    public LiveData<Boolean> getFinishLoaderAllSongs() {
+        return finishLoaderAllSongs;
+    }
+
 // Query all Songs and information.
 
     public void setCursorData(Cursor mData) {
@@ -96,10 +109,10 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
             if (rawBitmap != null) {
                 bitmapSong = BitmapFactory.decodeByteArray(rawBitmap, 0, rawBitmap.length, bfo);
             } else {
-                bitmapSong = null;
+                bitmapSong = BitmapFactory.decodeResource(mContext.getResources(),
+                        R.drawable.album_zing_portrait);
             }
             // getData
-
             SongsModel allSongsModel = new SongsModel(
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
                     bitmapSong,
@@ -110,15 +123,13 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)),
                     mCursor.getString(mCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)));
-            Log.i("BASEVIEWMODEL_ARTISTID",""+mCursor.getInt(mCursor.getColumnIndexOrThrow(
-                    MediaStore.Audio.Media.ARTIST_ID)));
-            // get temporary list all_songs.
+            // get list all_songs.
             allSongsModelList.add(allSongsModel);
             position = position + 1;
             setRepositoryData();
         }
         allSongsListRepository.setAllSongsList(allSongsModelList);
+        finishLoaderAllSongs.postValue(true);
     }
-// listen event running music service from fragments
 
 }
