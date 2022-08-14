@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
             name="AllSongsModel"
             type="com.tuanqd.mockproject.main.SongsModel" />
     </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +27,11 @@
             android:layout_height="wrap_content"
             android:background="@color/background_mock">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_thumbs_allSongs"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:src="@drawable/thumbai_zing"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,17 +43,18 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/stroke_popup_menu">
+
                 <TextView
                     android:id="@+id/txtArtist"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/title"
-                    android:textColorHint="@color/white"
                     android:ellipsize="end"
+                    android:hint="@string/title"
                     android:maxLength="15"
                     android:maxLines="1"
                     android:text="@{AllSongsModel.title}"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -60,11 +64,11 @@
                     android:id="@+id/txtNumberAlbums"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="@string/artist"
                     android:text="@{AllSongsModel.artist}"
                     android:textColor="@color/white"
-                    android:hint="@string/artist"
-                    android:textSize="12sp"
                     android:textColorHint="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/txtArtist"
                     app:layout_constraintHorizontal_bias="0.0"

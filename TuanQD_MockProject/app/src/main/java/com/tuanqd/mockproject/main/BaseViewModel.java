@@ -119,5 +119,6 @@ public class BaseViewModel extends AndroidViewModel implements LoaderManager.Loa
         }
         allSongsListRepository.setAllSongsList(allSongsModelList);
     }
+// listen event running music service from fragments
 
 }

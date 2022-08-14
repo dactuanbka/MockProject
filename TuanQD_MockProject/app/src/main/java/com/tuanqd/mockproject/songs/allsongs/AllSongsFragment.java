@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.baseproject.databinding.FragmentAllSongsBinding;
 import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
@@ -28,13 +29,12 @@ import com.tuanqd.mockproject.mediaplayer.MusicService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongInAllSongsClicked {
+public class AllSongsFragment extends Fragment  {
     private static final int LOADER_DEVICE_ID = 1;
     RecyclerView mRcvAllSongs;
     Intent intentAllSongs;
     AllSongsViewModel allSongsViewModel;
     BaseViewModel baseViewModel;
-    Drawable mDivider;
     FragmentAllSongsBinding fragmentAllSongsBinding;
     List<SongsModel> songsModelList = new ArrayList<>();
     AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
@@ -64,12 +64,11 @@ public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongIn
         allSongsViewModel = new ViewModelProvider(requireActivity()).get(AllSongsViewModel.class);
         mRcvAllSongs = fragmentAllSongsBinding.recyclerViewAllSongs;
         mRcvAllSongs.setLayoutManager((new LinearLayoutManager(requireContext())));
-
         if (allSongsListRepository.getAllSongsList() != null) {
-            mRcvAllSongs.setAdapter(new AllSongsAdapter(this,
+            mRcvAllSongs.setAdapter(new AllSongsAdapter(allSongsViewModel,
                     allSongsViewModel.getListData()));
         } else {
-            Log.i("TAG", "there is no repository");
+            Toast.makeText(requireContext(), "There is no music data ", Toast.LENGTH_SHORT).show();
         }
         registerBroadcast();
         return fragmentAllSongsBinding.getRoot();
@@ -77,8 +76,7 @@ public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongIn
 
     @Override
     public void onResume() {
-        // trả về cusor với các trường đã được trỏ tới.
-        mRcvAllSongs.setAdapter(new AllSongsAdapter(this,
+        mRcvAllSongs.setAdapter(new AllSongsAdapter(allSongsViewModel,
                 allSongsViewModel.getListData()));
         super.onResume();
     }
@@ -97,19 +95,17 @@ public class AllSongsFragment extends Fragment implements AllSongsAdapter.SongIn
         }
     };
 
-    @Override
-    public void songOnClick(int position) {
-        intentAllSongs = new Intent(requireContext(), MusicService.class);
-        intentAllSongs.putExtra("AllSongsStart", 1);
-        intentAllSongs.putExtra("positionAllSong", position);
-        requireContext().startService(intentAllSongs);
-    }
+//    @Override
+//    public void songOnClick(int position) {
+//        intentAllSongs = new Intent(requireContext(), MusicService.class);
+//        intentAllSongs.putExtra("AllSongsStart", 1);
+//        intentAllSongs.putExtra("positionAllSong", position);
+//        requireContext().startService(intentAllSongs);
+//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (intentAllSongs != null) {
-            requireContext().stopService(intentAllSongs);
-        }
     }
+
 }

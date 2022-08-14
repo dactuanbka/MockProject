@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.app.LoaderManager;
@@ -19,10 +20,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -30,6 +33,8 @@ import com.example.baseproject.R;
 import com.example.baseproject.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.tuanqd.mockproject.mediaplayer.MusicService;
+import com.tuanqd.mockproject.songs.allsongs.AllSongsViewModel;
 import com.tuanqd.mockproject.songs.artist.ArtistViewModel;
 
 import java.util.List;
@@ -41,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     NavController mNavController;
     private static final int LOADER_DEVICE_ID = 1;
     BaseViewModel baseViewModel;
-    ArtistViewModel artistViewModel;
+    AllSongsViewModel allSongsViewModel;
+    Intent intentAllSongs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         baseViewModel = new ViewModelProvider(this).get(BaseViewModel.class);
+        allSongsViewModel = new ViewModelProvider(this).get(AllSongsViewModel.class);
+        // all intent run service
 
+        // observer all song fragment send action.
+        allSongsViewModel.getPositionAllSong().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                intentAllSongs = new Intent(MainActivity.this, MusicService.class);
+                intentAllSongs.putExtra("AllSongsStart", 1);
+                intentAllSongs.putExtra("positionAllSong", integer);
+                startService(intentAllSongs);
+            }
+        });
     }
 
     @Override
@@ -103,5 +121,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (intentAllSongs != null) {
+            stopService(intentAllSongs);
+            intentAllSongs=null;
+        }
+
     }
 }
