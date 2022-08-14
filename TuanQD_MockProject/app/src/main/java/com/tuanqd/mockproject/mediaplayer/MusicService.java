@@ -22,6 +22,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -38,6 +39,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.tuanqd.mockproject.home.repository.AllSongsListRepository;
+import com.tuanqd.mockproject.main.MainActivity;
 import com.tuanqd.mockproject.main.SongsModel;
 
 import java.io.IOException;
@@ -141,10 +143,8 @@ public class MusicService extends Service {
             return 0;
         }
     }
-
-
     private void createNotification(SongsModel song) {
-        Intent intentFragment = new Intent(this, MusicFragment.class);
+        Intent intentFragment = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
                 0, intentFragment, PendingIntent.FLAG_UPDATE_CURRENT);
         // send BroadCast in application
@@ -219,29 +219,18 @@ public class MusicService extends Service {
             mediaPlayer.reset();
         }
         // resume pause
+        String musicPath = allSongsListRepository.getAllSongsList().get(positionInAllSongs).getMusicPath();
         if (pause) {
-            try {
-                String musicPath = allSongsListRepository.getAllSongsList().get(positionInAllSongs).getMusicPath();
-                createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
-                mediaPlayer.setDataSource(musicPath);
-                mediaPlayer.prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(musicPath));
             mediaPlayer.seekTo(length);
-            length = 0;
         } else {
-            try {
-                String musicPath = allSongsListRepository.getAllSongsList().get(positionInAllSongs).getMusicPath();
-                Log.i("Music Path ", musicPath);
+            Log.i("Music Path ", musicPath);
                 createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
-                mediaPlayer.setDataSource(musicPath);
-                mediaPlayer.prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(musicPath));
         }
         mediaPlayer.start();
+        length=0;
     }
 
     private void nextMusic() {
