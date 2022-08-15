@@ -37,6 +37,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -77,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean mBound = false;
     private HandlerThread mHandlerThread;
     private Handler mHandler;
-    int currentProgress = 0;
-    boolean test = true;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -92,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mHandlerThread.start();
             mHandler = new Handler(mHandlerThread.getLooper());
             updateData();
+
+            // mediaPlay seek to
+            updateUserActionOnSeekBar();
         }
 
         @Override
@@ -101,13 +103,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    private void updateUserActionOnSeekBar() {
+        // handle seekBar of main notification
+        activityMainBinding.appBarMain.seekBarMainNotification.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        if (musicService.mediaPlayer.isPlaying()) {
+                            activityMainBinding.appBarMain.seekBarMainNotification.setMax(musicService.getMaxDuration());
+                        }
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        if (musicService.mediaPlayer.isPlaying()) {
+                            Log.i("SEEK PROGRESS", "" + seekBar.getProgress());
+                            musicService.mediaPlayer.seekTo(seekBar.getProgress());
+                        }
+                    }
+                });
+    }
+
     private void updateData() {
         //update data
         runOnUiThread(() -> {
-            Log.i("get Max Duration", "" + musicService.getMaxDuration());
+//            Log.i("get Max Duration", "" + musicService.getMaxDuration());
             activityMainBinding.appBarMain.seekBarMainNotification.setMax(musicService.getMaxDuration());
             activityMainBinding.appBarMain.seekBarMainNotification.setProgress(musicService.getProgress());
-            Log.i("GetProgress", "" + musicService.getProgress());
+//            Log.i("GetProgress", "" + musicService.getProgress());
         });
         mHandler.postDelayed(() -> updateData(), 999);
     }
@@ -130,6 +158,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         allSongsViewModel = new ViewModelProvider(this).get(AllSongsViewModel.class);
         activityMainBinding.appBarMain.constraintLayoutMainNotification.setAlpha((float) 0.9);
+
+        // bind service
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+
         // main notification do action
         activityMainBinding.appBarMain.imgPlayMainNotification.setOnClickListener(this);
         activityMainBinding.appBarMain.imgPrevMainNotification.setOnClickListener(this);
@@ -157,29 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        // bind service
-        Intent intent = new Intent(this, MusicService.class);
-        bindService(intent, connection, BIND_AUTO_CREATE);
 
-
-        // handle seekBar of main notification
-        activityMainBinding.appBarMain.seekBarMainNotification.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
     }
 
     // result permission for access media
@@ -274,7 +285,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, false);
                     intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, false);
                     intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, isPlaying);
-                    startService(intentMainNotificationSend);
                 }
                 //pause media
                 else {
@@ -284,8 +294,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intentMainNotificationSend.putExtra(PREVIOUS_FROM_MAIN_NOTIFICATION, false);
                     intentMainNotificationSend.putExtra(NEXT_FROM_MAIN_NOTIFICATION, false);
                     intentMainNotificationSend.putExtra(IS_PLAYING_FROM_MAIN_NOTIFICATION, false);
-                    startService(intentMainNotificationSend);
                 }
+                startService(intentMainNotificationSend);
                 break;
             case (R.id.img_next_main_notification):
                 // next

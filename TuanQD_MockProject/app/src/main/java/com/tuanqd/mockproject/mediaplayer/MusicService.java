@@ -56,15 +56,13 @@ public class MusicService extends Service {
     AllSongsListRepository allSongsListRepository = AllSongsListRepository.getInstance();
     List<SongsModel> songsModelList = new ArrayList<>();
     int length = 0;
-    private int currentProgress = 0;
-
     // Binder to activity
     private IBinder binder = new LocalBinder();
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-
+        Log.i("onBind", "");
         return binder;
     }
 
@@ -73,7 +71,6 @@ public class MusicService extends Service {
             return MusicService.this;
         }
     }
-    /////////
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -116,19 +113,23 @@ public class MusicService extends Service {
             }
         }
 
-//         auto next song when finish
-        if (mediaPlayer != null) {
+        return START_STICKY;
+    }
+
+    private void autoNextSong() {
+        if (mediaPlayer.isPlaying()) {
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     if (positionInAllSongs == (songsModelList.size() - 1)) {
                         positionInAllSongs = 0;
                     }
+                    Log.i("complete song", "");
                     nextMusic();
                 }
             });
         }
-        return START_STICKY;
+
     }
 
     public int getProgress() {
@@ -232,17 +233,15 @@ public class MusicService extends Service {
             Log.i("Music Path ", musicPath);
             createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
             Uri uri = Uri.parse(musicPath);
-
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         }
 
         mediaPlayer.start();
         length = 0;
+        autoNextSong();
     }
 
-
-
-    private void nextMusic() {
+    public void nextMusic() {
         if (positionInAllSongs < (allSongsListRepository.getAllSongsList().size() - 1)) {
             positionInAllSongs = positionInAllSongs + 1;
         } else {
@@ -251,7 +250,7 @@ public class MusicService extends Service {
         playMusic();
     }
 
-    private void previousMusic() {
+    public void previousMusic() {
         if (positionInAllSongs > 0) {
             positionInAllSongs = positionInAllSongs - 1;
         }
@@ -269,6 +268,7 @@ public class MusicService extends Service {
         Log.i("LENGTH AT PAUSED", "" + length);
         createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
     }
+
     private void exitMusic() {
         stop = true;
         mIsPlaying = false;
