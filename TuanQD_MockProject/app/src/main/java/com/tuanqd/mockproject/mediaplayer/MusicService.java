@@ -59,8 +59,7 @@ public class MusicService extends Service {
     private int currentProgress = 0;
 
     // Binder to activity
-    LocalBinder binder = new LocalBinder() {
-    };
+    private IBinder binder = new LocalBinder();
 
     @Nullable
     @Override
@@ -129,20 +128,25 @@ public class MusicService extends Service {
                 }
             });
         }
-        // get progress
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-
-
-        }
         return START_STICKY;
     }
+
     public int getProgress() {
         if (mediaPlayer.isPlaying()) {
             return mediaPlayer.getCurrentPosition();
         } else {
+            return length;
+        }
+    }
+
+    public int getMaxDuration() {
+        if (mediaPlayer != null) {
+            return mediaPlayer.getDuration();
+        } else {
             return 0;
         }
     }
+
     private void createNotification(SongsModel song) {
         Intent intentFragment = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
@@ -222,40 +226,39 @@ public class MusicService extends Service {
         String musicPath = allSongsListRepository.getAllSongsList().get(positionInAllSongs).getMusicPath();
         if (pause) {
             createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(musicPath));
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(musicPath));
             mediaPlayer.seekTo(length);
         } else {
             Log.i("Music Path ", musicPath);
-                createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(musicPath));
+            createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
+            Uri uri = Uri.parse(musicPath);
+
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         }
+
         mediaPlayer.start();
-        length=0;
+        length = 0;
     }
 
+
+
     private void nextMusic() {
-        mediaPlayer.reset();
         if (positionInAllSongs < (allSongsListRepository.getAllSongsList().size() - 1)) {
             positionInAllSongs = positionInAllSongs + 1;
-
-            Log.i("size list", "" + allSongsListRepository.getAllSongsList().size());
-            Log.i("position", "" + positionInAllSongs);
-        }else{
-            positionInAllSongs=0;
+        } else {
+            positionInAllSongs = 0;
         }
         playMusic();
-
     }
 
     private void previousMusic() {
-        mediaPlayer.reset();
         if (positionInAllSongs > 0) {
             positionInAllSongs = positionInAllSongs - 1;
         }
-        if(positionInAllSongs==0){
-            positionInAllSongs=allSongsListRepository.getAllSongsList().size()-1;
+        if (positionInAllSongs == 0) {
+            positionInAllSongs = allSongsListRepository.getAllSongsList().size() - 1;
         }
-            playMusic();
+        playMusic();
     }
 
     private void pauseMusic() {
@@ -263,10 +266,9 @@ public class MusicService extends Service {
         pause = true;
         mIsPlaying = false;
         length = mediaPlayer.getCurrentPosition();
+        Log.i("LENGTH AT PAUSED", "" + length);
         createNotification(allSongsListRepository.getAllSongsList().get(positionInAllSongs));
     }
-
-
     private void exitMusic() {
         stop = true;
         mIsPlaying = false;

@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/background_mock"
         android:orientation="vertical"
-        android:paddingTop="40dp"
+        android:paddingTop="20dp"
         tools:context="com.tuanqd.mockproject.songs.artist.artistdetails.ArtistDetailsFragment">
 
         <ImageView

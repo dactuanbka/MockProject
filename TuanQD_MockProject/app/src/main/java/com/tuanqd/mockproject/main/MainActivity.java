@@ -87,7 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             musicService = binder.getService();
             Toast.makeText(MainActivity.this, "ServiceConnected", Toast.LENGTH_SHORT).show();
             mBound = true;
-
+            // update progress for seekbar
+            mHandlerThread = new HandlerThread("Server Handler Thread");
+            mHandlerThread.start();
+            mHandler = new Handler(mHandlerThread.getLooper());
+            updateData();
         }
 
         @Override
@@ -97,6 +101,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    private void updateData() {
+        //update data
+        runOnUiThread(() -> {
+            Log.i("get Max Duration", "" + musicService.getMaxDuration());
+            activityMainBinding.appBarMain.seekBarMainNotification.setMax(musicService.getMaxDuration());
+            activityMainBinding.appBarMain.seekBarMainNotification.setProgress(musicService.getProgress());
+            Log.i("GetProgress", "" + musicService.getProgress());
+        });
+        mHandler.postDelayed(() -> updateData(), 999);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,8 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         setBottomNavigation();
         setAppBar();
-
-
         // register for Broadcast receiver
 
         registerBroadcast();
@@ -147,35 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // bind service
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, connection, BIND_AUTO_CREATE);
-
-        // update progress for seekbar
-        mHandlerThread = new HandlerThread("Server Handler Thread");
-        mHandlerThread.start();
-        mHandler = new Handler(mHandlerThread.getLooper());
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (musicService != null) {
-                    do {
-                        currentProgress = musicService.getProgress();
-                        Log.i("Progress in Service", " " + currentProgress);
-                    } while (test);
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        activityMainBinding.appBarMain.seekBarMainNotification.
-                                setProgress(currentProgress);
-                        Log.i("current Progress", "" + currentProgress);
-                    }
-                });
-            }
-        });
 
 
         // handle seekBar of main notification
